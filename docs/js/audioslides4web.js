@@ -54,7 +54,6 @@ function populateSlides4JSON() {
           default:
             vJSON[id4JSON] = vLinkParam.getValue(vDOM2ID[id]);
         }
-
       };
-    }
+    };
   }

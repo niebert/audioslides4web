@@ -33,11 +33,13 @@ function getInteger(x) {
   return parsed
 }
 
-function populateSlides4JSON() {
-  vJSON.data.slides = [];
+function populateSlides4JSON(pJSON) {
+  pJSON.data.slides = [];
   for (var i = vJSON.first; i < (vJSON.last+1); i++) {
+    //alert("Create Slide "+i);
     vJSON.data.slides.push({
       "number": i
     })
   }
+  return pJSON;
 };

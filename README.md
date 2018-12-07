@@ -4,19 +4,21 @@ Audio Presentation for Web in HTML format.
   https://niebert.github.io/audioslides4web
 
 ## Online Tool
+First of all try to run the basic online tool to create a ZIP file with folders and HTML file that embeds a images (PNG-Files) in an HTML presentation. As underlying HTML presentation framework DZSlides was used to have a light weight framework with a single file.
 * Start the Online Tool `AudioSlides4Web` with https://niebert.github.io/audioslides4web
 * Fill out the Slide Info - take care about the number of slides - First slide number is by default 0 and last slide is by default 40. Slide 0 is the title page, but you can alter the slide number to 1.
 * Adapt the presentation name. The presentation name will be used as basename for the HTML-presentation and for the ZIP file too.
 * The ZIP file contains two folders `audio` and `image`.
 * The  folder `audio` contains all the audio comments for the slides. The file `audio/audio0.mp3` is the audio comment for the slide `images/img0.png` and e.g. `audio/audio15.mp3` is the audio comment for the slide `images/img15.png`.
 * You can record the audio comments with Open Source software [Audacity](https://www.audacityteam.org/), which you should store in MP3 format.
+* Press Downlo
 
 ## Wikiversity
 This repository was developed in the context of a Wikiversity course for Audio Slides, i.e. lean webbased presentation with audio comments and images as slides, that can be used in bandwidth limited environments in comparison to Youtube videos (see [Wikiversity AudioSlides4Web](https://en.wikiversity.org/wiki/AudioSlides4Web)).
 
 ## Used Libraries
 The following libraries are used for the repository:
-* [Editor ACE](hhttps://ace.c9.io/)  to edit the generated source code.
+* [Editor ACE](https://ace.c9.io/)  to edit the generated source code.
 * [Handlebars4Code](https://www.github.com/niebert/Handlebars4Code) - see [Demo of Handlebars4Code](https://niebert.github.io/Handlebars4Code)
 * [LinkParam](https://www.github.com/niebert/LinkParam) - see [Demo of Handlebars4Code](https://niebert.github.io/LinkParam)
 

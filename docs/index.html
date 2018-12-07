@@ -45,11 +45,18 @@
 
   </head>
   <body style="margin:10px;background:#C0C0C0;font-family:Arial,Helvetica,sans-serif">
+
     <script>
 
 
       function el(pID) {
-        return document.getElementById(pID)
+        var vNode = document.getElementById(pID);
+        if (vNode) {
+          return vNode
+        } else {
+          console.log("Error Node ['"+pID+"']");
+          return document.getElementById("tUndefined");
+        }
       };
 
       function callSource() {
@@ -98,6 +105,24 @@
 
       function getDataJSON() {
         var vJSON = vDataJSON.initdata;
+        for (var id in vDOM2ID) {
+          if (vDOM2ID.hasOwnProperty(id)) {
+              var id4JSON = getJSONID(id);
+              //vJSON["title"] = vLinkParam.getValue(vDOM2ID["tTitle"]);
+              switch (id) {
+                case "tFirst":
+                  vJSON[id4JSON] = getInteger(el(id).value);
+                break;
+                case "tLast":
+                  vJSON[id4JSON] = getInteger(el(id).value);
+                break;
+                default:
+                  vJSON[id4JSON] = el(id).value;
+              }
+            }
+        };
+        vJSON = populateSlides4JSON(vJSON);
+        console.log(JSON.stringify(vJSON,null,4));
         return vJSON;
       };
 
@@ -123,8 +148,8 @@
         var zip = new JSZip();
         // define
         var vBaseName = el("tFileName").value;
-        populateSlides4JSON();
-        alert("Save "+vBaseName+".zip");
+        vJSON = getDataJSON();
+        alert("Save '"+vBaseName+".zip' and unzip.\nDisplay '"+vBaseName+".html' in your browser");
         var vOutput = Handlebars4Code.compile_code("audioslides",vJSON);
         zip.file(vBaseName+".html", vOutput);
         zip.file("README.txt", getREADME("images","image files","Image")+"\n"+getREADME("audio","audio files","Audio"));
@@ -146,10 +171,9 @@
               // File is a Javascript Class defined in FileSaver.js
               var file = new File([vOutput], {type: "text/plain;charset=utf-8"});
               // method saveAs() is defined in FileSaver.js so import filesaver.js and blob.js to your Javascript project
-              saveAs(file,vFileName);
+              //saveAs(file,vFileName);
           } else {
               alert("ERROR: Could not parse JSON")
-
           }
         }
 
@@ -177,7 +201,7 @@
     <table border="1">
       <tr>
         <td>
-          <b>Title</b>
+          <b>Title</b><input type="text" id="tUndefined" value="ERROR" style="display:none">
         </td>
         <td>
           <input type="text" size="80" name="title" id="tTitle" value="My Presentation Title">
@@ -189,6 +213,22 @@
         </td>
         <td>
           <input type="text" size="80" name="course" id="tCourse" value="Ecotoxicology">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Author</b>
+        </td>
+        <td>
+          <input type="text" size="80" name="author" id="tAuthor" value="My Name">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Date</b>
+        </td>
+        <td>
+          <input type="text" size="80" name="date" id="tDate" value="00.00.00">
         </td>
       </tr>
       <tr style="display:none">
@@ -241,8 +281,8 @@
           <b>Audio Slides:</b>
         </td>
         <td>
-          <input type="button" id="bSource" value="Download Slides" onclick="callSource()">
-          <input type="button" id="bSourceZIP" value="Get Slides ZIP" onclick="callSourceZIP()" -->
+          <input type="button" id="bSource" value="Download Slides" onclick="callSource();return false">
+          <input type="button" id="bSourceZIP" value="Get Slides ZIP" onclick="callSourceZIP();return false" -->
           <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
         </td>
       </tr>
@@ -278,5 +318,6 @@
       };
     }
   }
+  el("tDate").value = getDateTime();
   </script>
 </html>
