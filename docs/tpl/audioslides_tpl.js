@@ -7,7 +7,7 @@ vDataJSON["tpl"]["audioslides"] = `
   <meta name="author" content="{{author}}">
   <meta name="course" content="{{course}}">
   <style type="text/css">code{white-space: pre;}</style>
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+<!-- link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' -->
 
 <style>
   html, .view body { background-color: black;  counter-reset: slideidx; }
