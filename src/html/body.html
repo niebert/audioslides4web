@@ -1,0 +1,98 @@
+<center>
+  <form action="audioslide.html" target="_blank">
+    <table border="1">
+      <tr>
+        <td>
+          <b>Title</b><input type="text" id="tUndefined" value="ERROR" style="display:none">
+        </td>
+        <td>
+          <input type="text" size="80" name="title" id="tTitle" value="My Presentation Title">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Course</b>
+        </td>
+        <td>
+          <input type="text" size="80" name="course" id="tCourse" value="Ecotoxicology">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Author</b>
+        </td>
+        <td>
+          <input type="text" size="80" name="author" id="tAuthor" value="My Name">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Date</b>
+        </td>
+        <td>
+          <input type="text" size="80" name="date" id="tDate" value="00.00.00">
+        </td>
+      </tr>
+      <tr style="display:none">
+          <td>
+            <b>Audio Slides</b>
+          </td>
+          <td>
+            <select name="audioslide" id="sAudioSlide">
+              <option value="yes">Use Player for Audio Slides</option>
+              <option value="no">NO Audio Slides</option>
+            </select>
+          </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Slide Index</b>
+        </td>
+        <td>
+          First Index: <input type="text" size="4" name="first" id="tFirst" value="0">
+          Last Index: <input type="text" size="4" name="last" id="tLast" value="40">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Slide Image Files</b>
+        </td>
+        <td>
+          Basename: <tt>/images/</tt><input type="text" size="10" name="imagebasename" id="tImageBaseName" value="img">.<input type="text" size="3" name="imageext" id="tImageExt" value="png">
+        </td>
+      </tr>
+        <tr>
+        <td>
+          <b>Audio Files</b>
+        </td>
+        <td>
+          Basename: <tt>/audio/</tt><input type="text" size="10" name="audiobasename" id="tAudioBaseName" value="audio">.<input type="text" size="3" name="audioext" id="tAudioExt" value="mp3"> Type:
+          <input type="text" size="4" name="audiotype" id="tAudioType" value="mpeg">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Filename</b>
+        </td>
+        <td>
+          <input type="text" size="30" name="filename" id="tFileName" value="audio_slides">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Audio Slides:</b>
+        </td>
+        <td>
+          <!--
+          <input type="button" id="bSource" value="Check Slides HTML" onclick="callSource();return false">
+          -->
+          <input type="button" id="bSourceZIP" value="Download Audio Slides ZIP" onclick="callSourceZIP();return false" -->
+          <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
+        </td>
+      </tr>
+
+    </table>
+
+  </form>
+
+</center>

@@ -152,7 +152,7 @@
             };
             console.log("getDataJSON:\n"+JSON.stringify(vJSON,null,4));
         };
-        vJSON = populateSlides4JSON(vJSON);
+        vJSON = populateSlides4JSON(vDOM2ID,vJSON);
         console.log(JSON.stringify(vJSON,null,4));
         return vJSON;
       };
@@ -331,24 +331,26 @@
 			</div>
     </p>
     <hr>
-  </body>
-  <script src="js/inithtml.js"></script>
-  <script>
-  //---------------------------------------
-  //------READ LINKPARAMETER---------------
-  //---------------------------------------
-  var vLinkParam = new LinkParam();
-  vLinkParam.init(document);
-  //------ POPULATE JSON ------------------
-  var vJSON = vDataJSON.initdata;
-  for (var id in vDOM2ID) {
-    if (vDOM2ID.hasOwnProperty(id)) {
-      if (vLinkParam.exists(vDOM2ID[id])) {
-        //el("vTitle").value = vLinkParam.getValue(vDOM2ID["tTitle"]);
-        el(id).value = vLinkParam.getValue(vDOM2ID[id]);
-      };
+    <script src="js/inithtml.js"></script>
+    <script>
+    //---------------------------------------
+    //------READ LINKPARAMETER---------------
+    //---------------------------------------
+    var vLinkParam = new LinkParam();
+    vLinkParam.init(document);
+    //------ POPULATE JSON ------------------
+    var vJSON = vDataJSON.initdata;
+    for (var id in vDOM2ID) {
+      if (vDOM2ID.hasOwnProperty(id)) {
+        if (vLinkParam.exists(vDOM2ID[id])) {
+          //el("vTitle").value = vLinkParam.getValue(vDOM2ID["tTitle"]);
+          el(id).value = vLinkParam.getValue(vDOM2ID[id]);
+        };
+      }
     }
-  }
-  el("tDate").value = getDateTime();
-  </script>
+    el("tDate").value = getDateTime();
+    </script>
+
+  </body>
+
 </html>

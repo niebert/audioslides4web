@@ -12,38 +12,57 @@ var vDOM2ID = {
   "tDate":"date"
 };
 
-function readDOM2JSON(pJSON){
-  for (var id in vDOM2ID) {
-    if (vDOM2ID.hasOwnProperty(id)) {
-      var vID = getJSONID(vDOM2ID[id]);
+var vID2DOM = {};
+
+// create a revers map
+for (var variable in vDOM2ID) {
+  if (vDOM2ID.hasOwnProperty(variable)) {
+    vID2DOM[vDOM2ID[variable]] = variable;
+  }
+}
+
+function el4ijsond (id) {
+  return el(vID2DOM[id]);
+}
+
+function readDOM2JSON(pDOM2ID,pJSON){
+  for (var id in pDOM2ID) {
+    console.log("readDOM2JSON id='" + id + "'");
+    if (pDOM2ID.hasOwnProperty(id)) {
+      var vID = getJSONID(pDOM2ID[id]);
       //vID = vID.replace(/audio/,"audio.");
       //vID = vID.replace(/image/,"image.");
       switch (vID) {
         case "first":
-          vJSON[vID] = getInteger(el(id).value);
+          pJSON[vID] = getInteger(el(id).value);
         break;
         case "last":
-        vJSON[vID] = getInteger(el(id).value);
+          pJSON[vID] = getInteger(el(id).value);
         break;
         case "audiobasename":
-          vJSON.data.audio.basename = el(id).value;
+          pJSON.data.audio.basename = el(id).value;
         break;
         case "audiotype":
-          vJSON.data.audio.type = el(id).value;
+          pJSON.data.audio.type = el(id).value;
         break;
         case "audioext":
-          vJSON.data.audio.ext = el(id).value;
+          pJSON.data.audio.ext = el(id).value;
         break;
         case "imagebasename":
-          vJSON.data.image.basename = el(id).value;
+          pJSON.data.image.basename = el(id).value;
         break;
         case "imageext":
-          vJSON.data.image.ext = el(id).value;
+          pJSON.data.image.ext = el(id).value;
         break;
-           vJSON[vID] = el(id).value;
-      }; // /switch
-    }; // /if
-  }; //  /for
+        default:
+           if  (pJSON.hasOwnProperty(vID)) {
+             pJSON[vID] = el(id).value;
+           } else {
+             console.log("WARNING: pJSON has no property '"+vID+"'");
+           };
+      } // /switch
+    } // /if
+  } //  /for
   return pJSON;
 }
 

@@ -1,0 +1,24 @@
+<script language="javascript">
+    //---------------------------------------
+    //---COMPILE HandleBars4Code Templates---
+    //---------------------------------------
+    Handlebars4Code.create_compiler(vDataJSON.tpl);
+    vDataJSON.out = Handlebars4Code.get_compiler();
+
+    //---------------------------------------
+    //------READ LINKPARAMETER---------------
+    //---------------------------------------
+    var vLinkParam = new LinkParam();
+    vLinkParam.init(document);
+    //------ POPULATE JSON ------------------
+    var vJSON = vDataJSON.initdata;
+    for (var id in vDOM2ID) {
+      if (vDOM2ID.hasOwnProperty(id)) {
+        if (vLinkParam.exists(vDOM2ID[id])) {
+          //el("vTitle").value = vLinkParam.getValue(vDOM2ID["tTitle"]);
+          el(id).value = vLinkParam.getValue(vDOM2ID[id]);
+        }
+      }
+    }
+    el("tDate").value = getDateTime();
+</script>

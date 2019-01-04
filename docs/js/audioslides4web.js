@@ -17,8 +17,8 @@ function getInteger4DOM(pDOMID) {
 }
 
 
-function populateSlides4JSON(pJSON) {
-  pJSON = readDOM2JSON(pJSON);
+function populateSlides4JSON(pDOM2ID,pJSON) {
+  pJSON = readDOM2JSON(pDOM2ID,pJSON);
   pJSON.data.slides = [];
   for (var i = vJSON.first; i < (vJSON.last+1); i++) {
     //alert("Create Slide "+i);
