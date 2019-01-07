@@ -337,10 +337,10 @@
         for (var i = 0; i < fa.length; i++) {
           nr = i + vJSON.first;
           nr = extract_number(fa[i].name,nr);
-          vExt = "." + vJSON.data.audio.ext;
+          vExt = vJSON.data.audio.ext;
           vExt = extract_extension(fa[i].name,vExt);
           console.log("Add Audio file to ZIP: "+vName+nr+vExt+ " File: "+vDataJSON.files.image[i]);
-          zip.file(vName+nr+vExt, fa[i].file, {base64: true});
+          zip.file(vName + nr + "." + vExt, fa[i].file, {base64: true});
         }
         //----- SAVE the loaded Images to ZIP ------
         vName = "images/"+vJSON.data.image.basename;
@@ -350,10 +350,10 @@
         for (var i = 0; i < fa.length; i++) {
           nr = i + vJSON.first;
           nr = extract_number(fa[i].name,nr);
-          vExt = "." + vJSON.data.image.ext;
+          vExt = vJSON.data.image.ext;
           vExt = extract_extension(fa[i].name,vExt);
           console.log("Add Image to ZIP: "+vName+nr+vExt + " File: "+vDataJSON.files.image[i]);
-          zip.file(vName+nr+vExt, fa[i].file, {base64: true});
+          zip.file(vName+nr + "." + vExt, fa[i].file, {base64: true});
         }
         var vOutput = Handlebars4Code.compile_code("audioslides",vJSON);
         zip.file(vBaseName+".html", vOutput);
