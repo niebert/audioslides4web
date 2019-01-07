@@ -9,8 +9,10 @@
     <script src="js/dom2id.js"></script>
     <script src="js/date_time.js"></script>
     <script src="js/jszip.js"></script>
+    <script src="js/loadfile4dom.js"></script>
     <script src="js/audioslides4web.js"></script>
     <script language="javascript">
+    var zip = new JSZip();
     // vDataJSON is the main JSON storage for the privacy friendly WebApp
     // File Loaded into vDataJSON by script tag
     var vDataJSON = {};
@@ -34,6 +36,119 @@
         This compiler is used in the compileCode() method
         var mySource = vJSONEditor.compileCode.docu4github(pJSON)
     */
+    vDataJSON.files = {
+      "audio":[],
+      "image":[]
+    };
+
+    //-----------------------------------------------
+
+        function setSlideCount() {
+          // get number of loaded slides
+          var arr_img = vDataJSON.files.image;
+          var vCount_Image = arr_img.length;
+
+          // get number of loaded audio files
+          var arr_audio = vDataJSON.files.audio.length;
+          var vCount_Audio = arr_audio.length;
+          // determine maximum and calc slide count
+          var vSlideCount = vCount_Image;
+          if (vCount_Audio > vCount_Image) {
+            vSlideCount = vCount_Audio;
+          };
+          // check all slide numbers encoded in the filename
+          var nr = 0;
+          for (var i = 0; i < arr_img.length; i++) {
+            nr = extract_number(arr_img[i].name,vSlideCount);
+            if (nr >= vSlideCount) {
+              vSlideCount = nr + 1;
+            }
+          }
+          for (var i = 0; i < arr_audio.length; i++) {
+            nr = extract_number(arr_audio[i].name,vSlideCount);
+            if (nr >= vSlideCount) {
+              vSlideCount = nr + 1;
+            }
+          }
+
+          // the setting of tFirst as integer
+          var vFirst = getInteger4DOM("tFirst");
+          // set tLast = vFirst + vSlideCount - 1
+          el("tLast").value = vFirst + vSlideCount - 1;
+        }
+
+    //-----------------------------------------------
+    //---- LoadFile4DOM -----------------------------
+    //-----------------------------------------------
+    var lf4d = new LoadFile4DOM();
+    var options = {
+      "debug": false // if true, it will show the hidden <input type="file" ...> loaders in DOM
+    };
+    lf4d.init(document,options);
+    //-----------------------------------------------
+    //----- Create a new Loader "file2image" --------
+    //-----------------------------------------------
+
+    var file2image = lf4d.get_loader_options("addfile2image","image_thumb");
+    file2image.returntype = "tag";
+    file2image.width = 300;
+    file2image.multiple = true;
+    // Define what to do with the loaded data
+    file2image.onload = function (data,err) {
+      if (err) {
+        // do something on error, perr contains error message
+        console.error(err);
+      } else {
+        // do something with the file content in data e.g. store  in a HTML textarea (e.g. <textarea id="mytextarea" ...>
+        console.log("CALL: file2image.onload('" + data.name + "')");
+        var vNode = document.getElementById("outimage");
+        if (vNode) {
+          //console.log("CALL: file2image.onload('" + data.name + "'): "+JSON.stringify(data,null,4));
+          var arr_img = vDataJSON.files.image;
+          vNode.innerHTML = vNode.innerHTML + "<li>Slide " + extract_number(data.name,arr_img.length)+ ": <tt>" + data.name + "</tt><br>" + data.tag + "</li>";
+          arr_img.push(data);
+          //zip.file(data.name, data.file, {base64: true})
+          setSlideCount();
+        } else {
+          console.error("ERROR: DOM Element 'outimage' does not exist!");
+        }
+
+      }
+    };
+    // create the load dialog 'file2image'
+    lf4d.create_load_dialog(file2image);
+
+    //-----------------------------------------------
+    //----- Create a new Loader "file2audio" --------
+    //-----------------------------------------------
+    var file2audio = lf4d.get_loader_options("addfile2audio","audio");
+    file2audio.returntype = "filehash";
+    // Define what to do with the loaded data
+    file2audio.onload = function (data,err) {
+      if (err) {
+        // do something on error, perr contains error message
+        console.error(err);
+      } else {
+        // do something with the file content in data e.g. store  in a HTML textarea (e.g. <textarea id="mytextarea" ...>
+        console.log("CALL: file2audio.onload('" + data.name + "')");
+        var vNode = document.getElementById("outaudio");
+        if (vNode) {
+          //console.log("CALL: file2audio.onload('" + data.name + "'): "+JSON.stringify(data,null,4));
+          var arr_audio = vDataJSON.files.audio;
+          vNode.innerHTML = vNode.innerHTML + "<li>Audio " + extract_number(data.name,arr_audio.length)+ ": <tt>" + data.name + "</tt> </li>";
+          arr_audio.push(data);
+          setSlideCount();
+          //zip.file(data.name, data.file, {base64: true})
+      } else {
+          console.error("ERROR: DOM Element 'outlist' does not exist!");
+        }
+
+      }
+    };
+    // create the load dialog 'file2audio'
+    lf4d.create_load_dialog(file2audio);
+    //-----------------------------------------------
+
     </script>
     <!-- ### Data JSON Loaded File  ##################### -->
     <script src="db/data.js"></script>
@@ -45,11 +160,9 @@
     <script src="js/handlebars4code.js"></script>
 
   </head>
-  <body style="margin:10px;background:#C0C0C0;font-family:Arial,Helvetica,sans-serif">
+  <body onload="lf4d.create()" style="margin:10px;background:#C0C0C0;font-family:Arial,Helvetica,sans-serif">
 
     <script>
-
-
       function el(pID) {
         var vNode = document.getElementById(pID);
         if (vNode) {
@@ -175,19 +288,79 @@
         return vOut;
       }
 
+      function reset_ZIP() {
+        zip = new JSZip();
+        el("outaudio").innerHTML = "";
+        el("outimage").innerHTML = "";
+        vDataJSON.files.audio = [];
+        vDataJSON.files.image = [];
+        console.log("Reset Uploads finalized");
+      }
+
+      function extract_number(name,nr) {
+        // name = "my_audio_01.mp3"
+        var name_split = name.split(".");
+        // name_split[0] = "my_audio_01"
+        var digits = name_split[0].replace(/[^0-9]/g,"");
+        // digits = "01"
+        if (digits.length > 0) {
+          nr = parseInt(digits);
+        };
+        return nr;
+      };
+
+      function extract_extension(name,ext) {
+        // name = "my_audio_01.mp3"
+        var name_split = name.split(".");
+        // name_split[1] = "mp3"
+        if (name_split.length > 0) {
+          ext = name_split[name_split.length - 1];
+        };
+        return ext;
+      };
+
+
       function callSourceZIP() {
-        var zip = new JSZip();
         // define
         var vBaseName = el("tFileName").value;
         vJSON = getDataJSON();
         alert("Save '"+vBaseName+".zip' and unzip.\nDisplay '"+vBaseName+".html' in your browser");
-        var vOutput = Handlebars4Code.compile_code("audioslides",vJSON);
-        zip.file(vBaseName+".html", vOutput);
         zip.file("README.txt", getREADME("images","image files","Image")+"\n"+getREADME("audio","audio files","Audio"));
         zip.file("images/README.txt", getREADME("images","image files","Image"));
         zip.file("audio/README.txt", getREADME("audio","audio files","Audio"));
+        //------ SAVE the loaded Audio to ZIP-------
+        var vName = "audio/"+vJSON.data.audio.basename;
+        var vExt = "." + vJSON.data.audio.ext;
+        var vNumber = 0;
+        var nr = 0;
+        var fa = vDataJSON.files.audio;
+        for (var i = 0; i < fa.length; i++) {
+          nr = i + vJSON.first;
+          nr = extract_number(fa[i].name,nr);
+          vExt = "." + vJSON.data.audio.ext;
+          vExt = extract_extension(fa[i].name,vExt);
+          console.log("Add Audio file to ZIP: "+vName+nr+vExt+ " File: "+vDataJSON.files.image[i]);
+          zip.file(vName+nr+vExt, fa[i].file, {base64: true});
+        }
+        //----- SAVE the loaded Images to ZIP ------
+        vName = "images/"+vJSON.data.image.basename;
+        vExt = "." + vJSON.data.image.ext;
+        nr = 0;
+        fa = vDataJSON.files.image;
+        for (var i = 0; i < fa.length; i++) {
+          nr = i + vJSON.first;
+          nr = extract_number(fa[i].name,nr);
+          vExt = "." + vJSON.data.image.ext;
+          vExt = extract_extension(fa[i].name,vExt);
+          console.log("Add Image to ZIP: "+vName+nr+vExt + " File: "+vDataJSON.files.image[i]);
+          zip.file(vName+nr+vExt, fa[i].file, {base64: true});
+        }
+        var vOutput = Handlebars4Code.compile_code("audioslides",vJSON);
+        zip.file(vBaseName+".html", vOutput);
+        console.log("Audio Presentation '"+vBaseName+".html' added");
         zip.generateAsync({type:"blob"})
           .then(function (blob) {
+            console.log("Save Blob as ZIP");
             saveAs(blob, vBaseName+".zip");
           });
 
@@ -312,15 +485,43 @@
           <b>Audio Slides:</b>
         </td>
         <td>
+          <!--
           <input type="button" id="bSource" value="Download Slides" onclick="callSource();return false">
-          <input type="button" id="bSourceZIP" value="Get Slides ZIP" onclick="callSourceZIP();return false" -->
+          -->
+          <button onclick="lf4d.open_dialog('addfile2image');return false">Add Slides</button>
+          <button onclick="lf4d.open_dialog('addfile2audio');return false">Add Audio </button>
+          <button onclick="reset_ZIP();return false">Reset</button> -
+          <input type="button" id="bSourceZIP" value="Download Audiopresentation ZIP" onclick="callSourceZIP();return false" -->
           <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
+        </td>
+      </tr>
+    </table>
+    </form>
+
+<br>
+
+    <table border="1">
+      <tr>
+        <td align="center">
+          <b>Added Image</b>
+        </td>
+        <td align="center">
+          <b>Added Audio</b>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">
+          <ul id="outimage">
+          </ul>
+        </td>
+        <td valign="top">
+          <ul id="outaudio">
+          </ul>
         </td>
       </tr>
 
     </table>
-    </form>
-    </center>
+  </center>
     <br>
     <p>
     <div id="footer" align="center" style="font-size: 80%">

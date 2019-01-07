@@ -1,1 +1,6 @@
 *.DS_Store
+node_modules/
+create_repo_folder.sh
+copy_libs.sh
+update_libs.sh
+update_src_libs.sh

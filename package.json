@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "asciimath-to-latex": "^0.3.2",
-    "handlebars": "^4.0.11"
+    "handlebars": "^4.0.11",
+    "handlebars4code": "^1.2.4",
+    "loadfile4dom": "^1.1.2"
   },
   "scripts": {
     "watch": "watchify src/main.js -o dist/audioslides4web.js -v",
