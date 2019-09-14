@@ -709,8 +709,7 @@ LinkParam.prototype.param2DOM = function (pLinkID,pDOMID,pOutType) {
   //    var vMyInstance = new LinkParam();
   //    vMyInstance.param2DOM(pLinkID,pDOMID,pOutType);
   //-------------------------------------------------------
-
-  var vOutType = pOutType || "html";
+	var vOutType = pOutType    ||    "html";
   if (this.exists(pLinkID)) {
       var vDOMID = pDOMID || pLinkID; // vDOMID is set by parameter pLinkID otherwise pDOMID == pLinkID;
       var vOutDOM = document.getElementById(vDOMID);

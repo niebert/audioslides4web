@@ -1,15 +1,14 @@
 /* ---------------------------------------
  Exported Module Variable: AudioSlides4Web
  Package:  audioslides4web
- Version:  1.1.2  Date: 2019/01/05 9:03:16
- Homepage: https://github.com/niebert/AudioSlides4Web#readme
+ Version:  1.1.2  Date: 2019/01/09 16:38:37
+ Homepage: https://github.com/niebert/audioslides4web#readme
  Author:   Engelbert Niehaus
  License:  MIT
- Date:     2019/01/05 9:03:16
+ Date:     2019/01/09 16:38:37
  Inheritance: 'AudioSlides4Web' inherits from 'Handlebars'
  Require Module with:
     const AudioSlides4Web = require('audioslides4web');
-    var  compileCode = AudioSlides4Web.compile(vTemplate);
  JSHint: installation with 'npm install jshint -g'
  ------------------------------------------ */
 

@@ -1,6 +1,5 @@
 # AudioSlides4Web
 `AudioSlides4Web` is a library and NPM module that extends Handlebars with Helpers for Code Generation in a specific programming language (e.g. Javascript)
-* **[Demo AudioSlides4Web](https://niebert.github.io/AudioSlides4Web)**
 
 <!-- BEGIN: src/readme/headerinto.md -->
 The following table of contents is generated with `node doctoc README.md`.
@@ -26,7 +25,10 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 
 ## Quick Start for Offline Use
 Download the `https://www.github.com/niebert/AudioSlides4Web/archive/master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder.
-Just copy the `docs/`-folder, rename the folder to `audioslides4web` and adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
+Just copy the `docs/`-folder, rename the folder to `audioslides4web`
+
+## Schema for Slide Generation
+adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
 
 <!-- END:   src/readme/usage.md -->
 <!-- BEGIN: src/readme/build_process.md -->
@@ -125,10 +127,10 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.1.2`   (last build 2019/01/08 13:08:04)
+* Version:  `1.1.2`   (last build 2019/01/09 16:38:37)
 * Homepage: `https://github.com/niebert/audioslides4web#readme`
 * License:  MIT
-* Date:     2019/01/08 13:08:04
+* Date:     2019/01/09 16:38:37
 * Inheritance: `AudioSlides4Web` inherits from `Handlebars`
 * Require Module with:
 ```javascript

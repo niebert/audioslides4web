@@ -8179,3 +8179,7 @@ function extract_extension(name,ext) {
        return ext;
 }
 //---- END: src/audioslides4web.js -----
+
+
+// -------NPM Export Variable: AudioSlides4Web---------------
+module.exports = AudioSlides4Web;

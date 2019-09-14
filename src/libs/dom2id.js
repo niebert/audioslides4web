@@ -59,7 +59,7 @@ function readDOM2JSON(pDOM2ID,pJSON){
              pJSON[vID] = el(id).value;
            } else {
              console.log("WARNING: pJSON has no property '"+vID+"'");
-           };
+           }
       } // /switch
     } // /if
   } //  /for
@@ -76,5 +76,5 @@ function getJSONID(pid) {
     console.log("ERROR: getJSONID(pid) pid undefined - return pid='ID_undef'");
   }
 
-  return id4JSON
+  return id4JSON;
 }

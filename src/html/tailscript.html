@@ -5,6 +5,7 @@
     Handlebars4Code.create_compiler(vDataJSON.tpl);
     vDataJSON.out = Handlebars4Code.get_compiler();
 
+
     //---------------------------------------
     //------READ LINKPARAMETER---------------
     //---------------------------------------
@@ -15,10 +16,21 @@
     for (var id in vDOM2ID) {
       if (vDOM2ID.hasOwnProperty(id)) {
         if (vLinkParam.exists(vDOM2ID[id])) {
-          //el("vTitle").value = vLinkParam.getValue(vDOM2ID["tTitle"]);
-          el(id).value = vLinkParam.getValue(vDOM2ID[id]);
+          var id4JSON = getJSONID(id);
+          //vJSON["title"] = vLinkParam.getValue(vDOM2ID["tTitle"]);
+          switch (id) {
+            case "tFirst":
+              vJSON[id4JSON] = getInteger(vLinkParam.getValue(vDOM2ID[id]));
+            break;
+            case "tLast":
+              vJSON[id4JSON] = getInteger(vLinkParam.getValue(vDOM2ID[id]));
+            break;
+            default:
+              vJSON[id4JSON] = vLinkParam.getValue(vDOM2ID[id]);
+          }
         }
       }
     }
     el("tDate").value = getDateTime();
+
 </script>

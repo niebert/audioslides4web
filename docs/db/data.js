@@ -4,7 +4,7 @@ vDataJSON["initdata"] = {
   "author": "My Name",
   "first" : 0,
   "last" : 4,
-  "date": getDateTime(),
+  "date": "0.0.0000",
   "data":{
     "audio":{
       "ext":"mp3",

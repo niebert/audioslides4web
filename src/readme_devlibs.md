@@ -1,10 +1,6 @@
 
 ## Libraries required for  `AudioSlides4Web`
 The following libraries are necessary for `audioslides4web.js`:
-* Lib: `asciimath-to-latex` Version: `^0.3.2`
-* Lib: `handlebars` Version: `^4.0.11`
-* Lib: `handlebars4code` Version: `^1.2.4`
-* Lib: `loadfile4dom` Version: `^1.1.2`
 
 
 ## Libraries for Building and Developement

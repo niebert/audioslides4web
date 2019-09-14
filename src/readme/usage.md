@@ -12,6 +12,9 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 
 ## Quick Start for Offline Use
 Download the `https://www.github.com/___PKG_GITHUBUSER___/___PKG_EXPORTVAR___/archive/master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder.
-Just copy the `docs/`-folder, rename the folder to `___PKG_NAME___` and adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
+Just copy the `docs/`-folder, rename the folder to `___PKG_NAME___`
+
+## Schema for Slide Generation
+adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
 
 <!-- END:   src/readme/usage.md -->
