@@ -1,6 +1,6 @@
 # AudioSlides4Web
 `AudioSlides4Web` is a library and NPM module that extends Handlebars with Helpers for Code Generation in a specific programming language (e.g. Javascript)
-* **[Demo AudioSlides4Web](https://niebert.github.io/AudioSlides4Web)**
+* **[Demo AudioSlides4Web](https://niebert.github.io/audioslides4web)**
 
 <!-- BEGIN: src/readme/headerinto.md -->
 The following table of contents is generated with `node doctoc README.md`.
@@ -16,7 +16,7 @@ The following table of contents is generated with `node doctoc README.md`.
 
 ## Usage
 First of all try to run the basic online tool to create a ZIP file with folders and HTML file that embeds a images (PNG-Files) in an HTML presentation. As underlying HTML presentation framework DZSlides was used to have a light weight framework with a single file.
-* Start the Online Tool `AudioSlides4Web` with https://niebert.github.io/AudioSlides4Web
+* Start the Online Tool `AudioSlides4Web` with https://niebert.github.io/audioslides4web
 * Fill out the Slide Info - take care about the number of slides - First slide number is by default 0 and last slide is by default 40. Slide 0 is the title page, but you can alter the slide number to 1.
 * Adapt the presentation name. The presentation name will be used as basename for the HTML-presentation and for the ZIP file too.
 * The ZIP file contains two folders `audio` and `image`.
@@ -113,7 +113,7 @@ The following libraries are necessary for `audioslides4web.js`:
 
 
 ## Libraries for Building and Developement
-The following libraries are necessary for building the `audioslides4web`. 
+The following libraries are necessary for building the `audioslides4web`.
 These libraries are not included in `audioslides4web.js`, but e.g. are required in `build.js`.
 * Lib: `browserify` Version: `^14.5.0`
 * Lib: `concat-files` Version: `^0.1.1`
