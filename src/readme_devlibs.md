@@ -12,4 +12,5 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 * Lib: `lint` Version: `^1.1.2`
 * Lib: `uglify-js` Version: `^2.6.2`
 * Lib: `watchify` Version: `^3.9.0`
+* Lib: `build4code` Version: `^0.2.6`
 
