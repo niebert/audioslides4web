@@ -1,10 +1,10 @@
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.2.1`   (last build 2020/03/11 7:40:53)
+* Version:  `1.2.1`   (last build 2020/03/11 7:58:10)
 * Homepage: `https://github.com/niebert/audioslides4web#readme`
 * License:  MIT
-* Date:     2020/03/11 7:40:53
+* Date:     2020/03/11 7:58:10
 * Require Module with:
 ```javascript
     const vAudioSlides4Web = require('audioslides4web');
