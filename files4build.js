@@ -33,7 +33,8 @@ const getHtml4Build = function (pPath) {
     //'./src/html_description.html',
     pPath+'body.html',
     pPath+'bodytail.html',
-    './src/html_tail.html',
+    //'./src/html_tail.html',
+    pPath+'footer.html',
     pPath+'tailscript.html',
     pPath+'tail.html'
   ];
@@ -50,7 +51,9 @@ const getCss4Build = function (pPath) {
 
 const getReadme4Build = function (pPath) {
   var vArray = [
-    './src/readme_header.md',
+    //'./src/readme_header.md',
+    pPath+'header.md',
+    pPath+'demolink.md',
     pPath+'headerintro.md',
     pPath+'doctoc.md',
     //'./src/readme_install.md',

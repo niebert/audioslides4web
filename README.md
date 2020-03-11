@@ -1,6 +1,5 @@
-# AudioSlides4Web
 `AudioSlides4Web` is a library and NPM module that was created as a online alternative for one export format of PanDocElectron. The WebApp runs completely in a browser  without contacting a web server for processing for generating a webbased presentation from slide/images and audio comments as MP3.
-* **[Demo AudioSlides4Web](https://niehausbert.gitlab.io/audioslides4web)**
+* **[Demo AudioSlides4Web](https://niebert.github.io/audioslides4web)**
 
 <!-- BEGIN: src/readme/headerinto.md -->
 The following table of contents is generated with `node doctoc README.md`.
@@ -41,7 +40,7 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 * Press Download ZIP and you will get the ZIP folder structure with the presentation as `audio_slides.zip`.
 
 ## Quick Start for Offline Use
-Download the `https://gitlab.com/niehausbert/audioslides4web/-/archive/master/audioslides4web-master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. `src` contains the sources for the build process).
+Download the `https://gitlab.com/niebert/audioslides4web/-/archive/master/audioslides4web-master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. `src` contains the sources for the build process).
 For offline use just copy the `docs/`-folder, rename the folder to `audioslides4web/`. For starting the WebApp load the file `audioslides4web/index.html` in a current version of Firefox, Chrome or Safari.
 
 ## Schema for Slide Generation
@@ -145,15 +144,15 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 * Lib: `lint` Version: `^1.1.2`
 * Lib: `uglify-js` Version: `^2.6.2`
 * Lib: `watchify` Version: `^3.9.0`
+* Lib: `build4code` Version: `^0.2.6`
 
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.2.0`   (last build 2020/03/11 5:33:15)
-* Homepage: `https://gitlab.com/niehausbert/audioslides4web#readme`
+* Version:  `1.2.1`   (last build 2020/03/11 7:40:53)
+* Homepage: `https://github.com/niebert/audioslides4web#readme`
 * License:  MIT
-* Date:     2020/03/11 5:33:15
-* Inheritance: `AudioSlides4Web` inherits from `Handlebars`
+* Date:     2020/03/11 7:40:53
 * Require Module with:
 ```javascript
     const vAudioSlides4Web = require('audioslides4web');

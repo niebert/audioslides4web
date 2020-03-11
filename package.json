@@ -1,13 +1,17 @@
 {
   "name": "audioslides4web",
   "exportvar": "AudioSlides4Web",
-  "version": "1.1.2",
-  "description": "library and NPM module that extends Handlebars with Helpers for Code Generation in a specific programming language (e.g. Javascript)",
+  "version": "1.2.1",
+  "demolink": "https://niebert.github.io/audioslides4web",
+  "description": "library and NPM module that was created as a online alternative for one export format of PanDocElectron. The WebApp runs completely in a browser  without contacting a web server for processing for generating a webbased presentation from slide/images and audio comments as MP3.",
   "main": "src/main.js",
-  "inherit": "Handlebars",
   "devDependencies": {
+    "browserify": "^14.5.0",
     "concat-files": "^0.1.1",
     "doctoc": "^1.3.0",
+    "lint": "^1.1.2",
+    "uglify-js": "^2.6.2",
+    "watchify": "^3.9.0",
     "build4code": "^0.2.6"
   },
   "dependencies": {},
@@ -36,7 +40,13 @@
     "HTML",
     "JSON"
   ],
-  "githubuser": "niebert",
+  "gituser": "niebert",
+  "build": {
+    "readme": "README.md",
+    "html": "docs/index.html",
+    "css": "docs/css/main.css",
+    "htmlsrc": "docs/index_src_libs.html"
+  },
   "author": "Engelbert Niehaus",
   "license": "MIT",
   "bugs": {
