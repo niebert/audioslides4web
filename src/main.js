@@ -1,11 +1,11 @@
 /* ---------------------------------------
  Exported Module Variable: AudioSlides4Web
  Package:  audioslides4web
- Version:  1.2.1  Date: 2020/03/11 7:58:10
+ Version:  1.2.1  Date: 2020/03/11 8:12:15
  Homepage: https://github.com/niebert/audioslides4web#readme
  Author:   Engelbert Niehaus
  License:  MIT
- Date:     2020/03/11 7:58:10
+ Date:     2020/03/11 8:12:15
  Require Module with:
     const AudioSlides4Web = require('audioslides4web');
  JSHint: installation with 'npm install jshint -g'

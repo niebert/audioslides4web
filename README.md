@@ -31,7 +31,7 @@ The following table of contents is generated with `node doctoc README.md`.
 
 ## Usage
 First of all try to run the basic online tool to create a ZIP file with folders and HTML file that embeds a images (PNG-Files) in an HTML presentation. As underlying HTML presentation framework DZSlides was used to have a light weight framework with a single file.
-* Start the Online Tool `AudioSlides4Web` with https://githubuser.github.io/AudioSlides4Web
+* Start the Online Tool `AudioSlides4Web` with https://niebert.github.io/audioslides4web
 * Fill out the Slide Info - take care about the number of slides - First slide number is by default 0 and last slide is by default 40. Slide 0 is the title page, but you can alter the slide number to 1.
 * Adapt the presentation name. The presentation name will be used as basename for the HTML-presentation and for the ZIP file too.
 * The ZIP file contains two folders `audio` and `image`.
@@ -149,10 +149,10 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.2.1`   (last build 2020/03/11 7:58:10)
+* Version:  `1.2.1`   (last build 2020/03/11 8:12:15)
 * Homepage: `https://github.com/niebert/audioslides4web#readme`
 * License:  MIT
-* Date:     2020/03/11 7:58:10
+* Date:     2020/03/11 8:12:15
 * Require Module with:
 ```javascript
     const vAudioSlides4Web = require('audioslides4web');

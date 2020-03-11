@@ -2,7 +2,7 @@
 
 ## Usage
 First of all try to run the basic online tool to create a ZIP file with folders and HTML file that embeds a images (PNG-Files) in an HTML presentation. As underlying HTML presentation framework DZSlides was used to have a light weight framework with a single file.
-* Start the Online Tool `___PKG_EXPORTVAR___` with https://___PKG_GITHUBUSER___.github.io/___PKG_EXPORTVAR___
+* Start the Online Tool `___PKG_EXPORTVAR___` with ___PKG_DEMOLINK___
 * Fill out the Slide Info - take care about the number of slides - First slide number is by default 0 and last slide is by default 40. Slide 0 is the title page, but you can alter the slide number to 1.
 * Adapt the presentation name. The presentation name will be used as basename for the HTML-presentation and for the ZIP file too.
 * The ZIP file contains two folders `audio` and `image`.
