@@ -174,7 +174,7 @@ function writeConvertJSON(srcPath, savPath, pJSON) {
 var pkg_test = {
 	"name":"handlebars4code5",
 	"exportvar":"Handlebars4Code5",
-	"githubuser":"myusername"
+	"gituser":"myusername"
 }
 //writeConvertJSON('./src/readme/folderrepo.md','./src/readme/folderrepo.test.md',pkg_test);
 console.log(getConvertedFile4JSON('./src/readme/folderrepo.md',pkg_test));
@@ -378,7 +378,7 @@ function create_html_description(pkg) {
   var vFileName = "html_description.html";
   var vOut = "";
   vOut += "\nThe library <tt>"+pkg.exportvar+"</tt> is a "+pkg.description+". ";
-  vOut += "\nThe source code of  "+pkg.exportvar+" can be downloaded as <a href=\"https://github.com/"+pkg.githubuser+"/" +pkg.exportvar+"/archive/master.zip\"  target=\"_blank\">ZIP-file "+pkg.name+".zip</a>";
+  vOut += "\nThe source code of  "+pkg.exportvar+" can be downloaded as <a href=\"https://github.com/"+pkg.gituser+"/" +pkg.exportvar+"/archive/master.zip\"  target=\"_blank\">ZIP-file "+pkg.name+".zip</a>";
   vOut += "\n";
   save_file("./src/"+vFileName, vOut,"create HTML code - 'src/"+vFileName+"' was saved!");
 }
@@ -388,7 +388,7 @@ function create_html_tail(pkg) {
 	var vRepo = pkg.repository.url;
 	var vBegin = vRepo.indexOf("https:");
 	var vEnd = vRepo.lastIndexOf(".git");
-	var vURL = "https://www.github.com/" + pkg.githubuser + "/" + pkg.exportvar;
+	var vURL = "https://www.github.com/" + pkg.gituser + "/" + pkg.exportvar;
 	if ((vBegin >= 0) && (vEnd > vBegin)) {
 		vURL = vRepo.substring(vBegin,vEnd);
 	};

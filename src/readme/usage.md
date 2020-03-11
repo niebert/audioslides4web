@@ -11,8 +11,8 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 * Press Download ZIP and you will get the ZIP folder structure with the presentation as `audio_slides.zip`.
 
 ## Quick Start for Offline Use
-Download the `https://www.github.com/___PKG_GITHUBUSER___/___PKG_EXPORTVAR___/archive/master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder.
-Just copy the `docs/`-folder, rename the folder to `___PKG_NAME___`
+Download the `https://gitlab.com/___PKG_GITUSER___/___PKG_NAME___/-/archive/master/___PKG_NAME___-master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. `src` contains the sources for the build process).
+For offline use just copy the `docs/`-folder, rename the folder to `___PKG_NAME___/`. For starting the WebApp load the file `___PKG_NAME___/index.html` in a current version of Firefox, Chrome or Safari.
 
 ## Schema for Slide Generation
 adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).

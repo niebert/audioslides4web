@@ -1,11 +1,11 @@
 /* ---------------------------------------
  Exported Module Variable: AudioSlides4Web
  Package:  audioslides4web
- Version:  1.1.2  Date: 2019/01/09 16:38:37
- Homepage: https://github.com/niebert/audioslides4web#readme
+ Version:  1.2.0  Date: 2020/03/11 5:33:15
+ Homepage: https://gitlab.com/niehausbert/audioslides4web#readme
  Author:   Engelbert Niehaus
  License:  MIT
- Date:     2019/01/09 16:38:37
+ Date:     2020/03/11 5:33:15
  Inheritance: 'AudioSlides4Web' inherits from 'Handlebars'
  Require Module with:
     const AudioSlides4Web = require('audioslides4web');
@@ -7953,6 +7953,20 @@ var Handlebars4Code = {
   "get_compiler": get_compiler
 };
 //---- BEGIN: src/audioslides4web.js -----
+var zip = new JSZip();
+
+//-----------------------------------------------
+//--- DOWNLOAD ZIP ------------------------------
+//---Use FileSaver.js by Eli Grey to save ZIP----
+//-----------------------------------------------
+function download_zip(pFilename,pZIP) {
+  var vFilename = pFilename || "my_loaded_files.zip";
+  pZIP.generateAsync({type:"blob"}).then(function (blob) { // 1) generate the zip file
+    saveAs(blob, vFilename);                          // 2) trigger the download
+  }, function (err) {
+    console.error("ERROR: generation of zip-file '" + vFilename + "' - "+err);
+  });
+}
 
 function el(pID) {
   var vNode = document.getElementById(pID);
@@ -7983,13 +7997,53 @@ function getInteger4DOM(pDOMID) {
 }
 
 
+
+function get_root_dir() {
+  var vTitle = el("tTitle").value;
+  var vPath = "audio_slides";
+  if (vTitle) {
+    vPath = string2filename(vTitle);
+  };
+  console.log("Root Directory: '" + vPath + "'");
+  return vPath;
+}
+
 function populateSlides4JSON(pDOM2ID,pJSON) {
+  var arr_audio = vDataJSON.files.audio;
   pJSON = readDOM2JSON(pDOM2ID,pJSON);
   pJSON.data.slides = [];
+  pJSON.first = getInteger4DOM("tFirst");
+  pJSON.last = getInteger4DOM("tLast");
+  var vAudioType = "mpeg";
+  var vFound = -1;
+  var vExt = "-";
   for (var i = pJSON.first; i < (pJSON.last+1); i++) {
     //alert("Create Slide "+i);
+    vAudioType = "-";
+    vExt = "-";
+    vFound = -1;
+    for (var k = 0; k < arr_audio.length; k++) {
+      // extract the audio number in filename
+      if (arr_audio[k]) {
+        nr = extract_number(arr_audio[k].name,-1);
+        if (nr == i) {
+          // if the number matches with the filename set the vAudioType
+          vFound = k;
+        }
+      }
+    }
+    // Set the audio type if audio comment exist
+    if (vFound >=  0) {
+      vAudioType = getType4AudioExt(arr_audio[vFound].name);
+      vExt = getExtension(arr_audio[vFound].name);
+      console.log("Slide " + i + " with Audio of Type '" + vAudioType + "'");
+    } else {
+      console.log("Slide " + i + " no Audio ");
+    }
     pJSON.data.slides.push({
-      "number": i
+      "number": i,
+      "audiotype": vAudioType,
+      "ext": vExt
     });
   }
   return pJSON;
@@ -7999,9 +8053,10 @@ function setSlideCount() {
   // get number of loaded slides
   var arr_img = vDataJSON.files.image;
   var vCount_Image = arr_img.length;
-  var i = 0;
+  var vFirst = 30000;
+  var vLast = -1;
   // get number of loaded audio files
-  var arr_audio = vDataJSON.files.audio.length;
+  var arr_audio = vDataJSON.files.audio;
   var vCount_Audio = arr_audio.length;
   // determine maximum and calc slide count
   var vSlideCount = vCount_Image;
@@ -8011,22 +8066,32 @@ function setSlideCount() {
   // check all slide numbers encoded in the filename
   var nr = 0;
   for (i = 0; i < arr_img.length; i++) {
-    nr = extract_number(arr_img[i].name,vSlideCount);
-    if (nr >= vSlideCount) {
-      vSlideCount = nr + 1;
-    }
+    nr = extract_number(arr_img[i].name,vLast);
+    if (nr > vLast) {
+      vLast = nr;
+    };
+    nr = extract_number(arr_img[i].name,vFirst);
+    if (nr < vFirst) {
+      vFirst = nr;
+    };
+
   }
   for (i = 0; i < arr_audio.length; i++) {
-    nr = extract_number(arr_audio[i].name,vSlideCount);
-    if (nr >= vSlideCount) {
-      vSlideCount = nr + 1;
-    }
+    nr = extract_number(arr_audio[i].name,vLast);
+    if (nr > vLast) {
+      vLast = nr;
+    };
+    nr = extract_number(arr_audio[i].name,vFirst);
+    if (nr < vFirst) {
+      vFirst = nr;
+    };
   }
 
   // the setting of tFirst as integer
-  var vFirst = getInteger4DOM("tFirst");
+  //var vFirst = getInteger4DOM("tFirst");
   // set tLast = vFirst + vSlideCount - 1
-  el("tLast").value = vFirst + vSlideCount - 1;
+  el("tFirst").value = vFirst;
+  el("tLast").value = vLast;
 }
 
 function convert(pTplID) {
@@ -8064,9 +8129,56 @@ function callSource() {
 }
 
 function callSourceZIP() {
-  var vURL = "output_zip.html?"+get_link_parameter();
+  //var vURL = "output_zip.html?"+get_link_parameter();
   //document.location.href=vURL;
-  window.open(vURL);
+  zip = new JSZip();
+  var vJSON = getDataJSON();
+  if (vJSON) {
+    //var vOutput = Handlebars4Code.compile_code("audioslides",vJSON);
+    var index_out = get_index_html(vJSON);
+    el("outtext").value = index_out;
+    var vRootDir = get_root_dir();
+    var vFileName = el("tFileName").value;
+    save_html2zip(vRootDir+"/"+vFileName,index_out);
+    save_audio2tip(vRootDir+"/audio/");
+    save_images2zip(vRootDir+"/images/");
+    download_zip(vRootDir+".zip",zip);
+  } else {
+    console.error("ERROR: data in vJSON with slides info is not defined!");
+  }
+  //window.open(vURL);
+}
+
+function save_html2zip(pFileName,pOut) {
+  console.log("Save main HTML '"+pFileName+"'");
+  zip.file(pFileName, pOut);
+}
+
+function save_audio2tip(pPath) {
+  var arr_audio = vDataJSON.files.audio;
+  var vBaseName = el("tAudioBaseName").value;
+  for (i = 0; i < arr_audio.length; i++) {
+    if (arr_audio[i]) {
+      nr = extract_number(arr_audio[i].name,-1);
+      vFileName = pPath + vBaseName + nr + "." + getExtension(arr_audio[i].name);
+      zip.file(vFileName, arr_audio[i].file, {base64: true});
+    }
+  }
+}
+
+function save_images2zip(pPath) {
+  var arr_img = vDataJSON.files.image;
+  var vBaseName = el("tImageBaseName").value;
+  var vFileName = "";
+  for (i = 0; i < arr_img.length; i++) {
+    if (arr_img[i]) {
+      nr = extract_number(arr_img[i].name,-1);
+      vFileName = pPath + vBaseName + nr + "." + getExtension(arr_img[i].name);
+      zip.file(vFileName, arr_img[i].file, {base64: true});
+    }
+  }
+
+
 }
 
 function displaySource() {
@@ -8075,6 +8187,37 @@ function displaySource() {
   var vURL = "output_textarea.html?"+ get_link_parameter();
   //document.location.href=vURL;
   window.open(vURL);
+}
+
+function get_index_html(pJSON) {
+  var out = "undefined index.html in get_index_html()";
+  if (pJSON) {
+    out = Handlebars4Code.compile_code("audioslides",pJSON);
+  } else {
+    console.error("ERROR - get_index_html(): data in vJSON with slides info is not defined!");
+  }
+  //var out = get_header_html();
+  //out += get_slides_html();
+  //out += get_tail_html();
+  return out;
+}
+
+function get_header_html() {
+  var out = "";
+  //out += ;
+  return out;
+}
+
+function get_slides_html() {
+  var out = "";
+  //out += ;
+  return out;
+}
+
+function get_tail_html() {
+  var out = "";
+  //out += ;
+  return out;
 }
 
 function parseJSON(pString) {
@@ -8094,6 +8237,7 @@ function parseJSON(pString) {
       }
     }
 }
+
 function getDataJSON() {
   var vJSON = vDataJSON.initdata;
   for (var id in vDOM2ID) {

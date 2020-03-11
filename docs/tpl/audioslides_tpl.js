@@ -150,9 +150,14 @@ vDataJSON["tpl"]["audioslides"] = `
 		<tr>
 			<td>
 				<center>
+{{#ifcond ext "!=" "-"}}
 					{{{data.audio.controls}}}
-			  		<source src="audio/{{data.audio.basename}}{{number}}.{{data.audio.ext}}" type="audio/{{data.audio.type}}"> <!-- AudioType: mpeg -->
+			  		<source src="audio/{{data.audio.basename}}{{number}}.{{ext}}" type="audio/{{audiotype}}"> <!-- AudioType: {{audiotype}} -->
 					</audio>
+{{/ifcond}}
+{{#ifcond ext "==" "-"}}
+					&nbsp; <br>
+{{/ifcond}}
 				</center>
 			</td>
 		</tr>
