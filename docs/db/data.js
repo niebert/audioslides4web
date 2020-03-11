@@ -18,13 +18,19 @@ vDataJSON["initdata"] = {
     },
     "slides":  [
             {
-              "number": 0
+              "number": 0,
+              "audiotype": "mpeg",
+              "ext":"mp3"
             },
             {
-              "number": 1
+              "number": 1,
+              "audiotype": "ogg",
+              "ext":"ogg"
             },
             {
-              "number": 2
+              "number": 2,
+              "audiotype": "mpeg",
+              "ext":"mp3"
             }
       ]
 

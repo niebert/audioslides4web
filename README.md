@@ -1,6 +1,6 @@
 # AudioSlides4Web
-`AudioSlides4Web` is a library and NPM module that extends Handlebars with Helpers for Code Generation in a specific programming language (e.g. Javascript)
-* **[Demo AudioSlides4Web](https://niebert.github.io/audioslides4web)**
+`AudioSlides4Web` is a library and NPM module that was created as a online alternative for one export format of PanDocElectron. The WebApp runs completely in a browser  without contacting a web server for processing for generating a webbased presentation from slide/images and audio comments as MP3.
+* **[Demo AudioSlides4Web](https://niehausbert.gitlab.io/audioslides4web)**
 
 <!-- BEGIN: src/readme/headerinto.md -->
 The following table of contents is generated with `node doctoc README.md`.
@@ -14,7 +14,9 @@ The following table of contents is generated with `node doctoc README.md`.
 
 - [Usage](#usage)
 - [Quick Start for Offline Use](#quick-start-for-offline-use)
+- [Schema for Slide Generation](#schema-for-slide-generation)
 - [Build Process of `npm run build`](#build-process-of-npm-run-build)
+- [Build and Compress with Browserify, Watchify, UglifyJS](#build-and-compress-with-browserify-watchify-uglifyjs)
   - [Browserify and Watchify](#browserify-and-watchify)
   - [Global Installation of Browserify, Watchify, UglifyJS and DocToc](#global-installation-of-browserify-watchify-uglifyjs-and-doctoc)
   - [Package Installation of Browserify and Watchify - Alternative](#package-installation-of-browserify-and-watchify---alternative)
@@ -24,12 +26,13 @@ The following table of contents is generated with `node doctoc README.md`.
 - [Libraries required for  `AudioSlides4Web`](#libraries-required-for--audioslides4web)
 - [Libraries for Building and Developement](#libraries-for-building-and-developement)
 - [NPM Library Information](#npm-library-information)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- BEGIN: src/readme/usage.md -->
 
 ## Usage
 First of all try to run the basic online tool to create a ZIP file with folders and HTML file that embeds a images (PNG-Files) in an HTML presentation. As underlying HTML presentation framework DZSlides was used to have a light weight framework with a single file.
-* Start the Online Tool `AudioSlides4Web` with https://niebert.github.io/audioslides4web
+* Start the Online Tool `AudioSlides4Web` with https://githubuser.github.io/AudioSlides4Web
 * Fill out the Slide Info - take care about the number of slides - First slide number is by default 0 and last slide is by default 40. Slide 0 is the title page, but you can alter the slide number to 1.
 * Adapt the presentation name. The presentation name will be used as basename for the HTML-presentation and for the ZIP file too.
 * The ZIP file contains two folders `audio` and `image`.
@@ -38,8 +41,11 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 * Press Download ZIP and you will get the ZIP folder structure with the presentation as `audio_slides.zip`.
 
 ## Quick Start for Offline Use
-Download the `https://www.github.com/niebert/AudioSlides4Web/archive/master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder.
-Just copy the `docs/`-folder, rename the folder to `audioslides4web` and adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
+Download the `https://gitlab.com/niehausbert/audioslides4web/-/archive/master/audioslides4web-master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. `src` contains the sources for the build process).
+For offline use just copy the `docs/`-folder, rename the folder to `audioslides4web/`. For starting the WebApp load the file `audioslides4web/index.html` in a current version of Firefox, Chrome or Safari.
+
+## Schema for Slide Generation
+adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
 
 <!-- END:   src/readme/usage.md -->
 <!-- BEGIN: src/readme/build_process.md -->
@@ -112,21 +118,26 @@ Special thanks to the following individual developers and teams of OpenSource Ja
 * [HandleBars](http://handlebarsjs.com/) the code generation in Javascript was implemented
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the [JavascriptClassCreator Project](https://niebert.github.io/JavascriptClassCreator) `JSCC`.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
+* [Font Awesome Icons - 4.7.0](https://fontawesome.com/v4.7.0/icons/) thanks to [fontawesome.com](https://fontawesome.com) for providing the [free 4.7.0 version](https://fontawesome.com/v4.7.0/icons/) for local application for this WebApp. The [fonts in version 4.7.0](https://fontawesome.com/v4.7.0/icons/) are created by ***[Font Awesome](https://fontawesome.com)*** and
+licensed under [SIL OFL 1.1](http://scripts.sil.org/OFL). The javascript-code for injecting the icon into the DOM licensed under [MIT License](http://opensource.org/licenses/mit-license.html). The
+[Documentation](https://fontawesome.com/v4.7.0/examples/) for [Font Awesome - 4.7.0](https://fontawesome.com/v4.7.0/icons/) licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/).
 * Developer [Mihai Bazon](http://lisperator.net/) create UglifyJS, a great tool to handle and parse Javascript Code and minify the Javascript code (see [Source Code of UglifyJS](https://github.com/mishoo/UglifyJS2)).
 * The wrapper for UglifyJS is written [Dan Wolff](http://danwolff.se/). His UglifyJS-Online example is used to minify/compress the exported Javascript code of generated JS Classes (For Online Example of the [UglifyJS-Wrapper](https://skalman.github.io/UglifyJS-online/) see source code on https://github.com/Skalman/UglifyJS-online for the Online-Version of the Wrapper.
 * Developers of ACE Code Editor https://ace.c9.io (Javascript Editing uses the Editor in iFrames)
+* `[LoadFile4DOM](https://www.gitlab.com/niehausbert/loadfile4dom)` is a library that allows to load files into an application that run completely in a browser without the need to submit data to a server for processing. With this library the users are able load files into your browser application and process the data in the browser and provide the output to the user, without submitting any data to a server. **[Demo LoadFile4DOM](https://niehausbert.gitlab.io/loadfile4dom)**
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js) Developer Eli Grey provided the `FileSaver.js` that is used to store created `JSCC` files to the local filesystem. `JSCC` uses the same mechanism of browsers, that allows a `Save as...` in the context menu of a web pages or image. So not uncontrolled write access to your file system is implemented, because users have to select the locations in which the user whats to store the file (e.g. JSON, Javascript or HTML).
 * [JointJS](https://github.com/clientIO/joint) JointJS is a JavaScript diagramming library. It can be used to create either static diagrams. JointJS is used in this project to create UML-diagrams, that are interactive diagramming in conjunction and application builder in Javascript.
 * [Inheritage for JavaScript with protoypes](http://phrogz.net/js/classes/OOPinJS2.html) by Gavin Kistner
 * [3 ways to define a JavaScript class](https://www.phpied.com/3-ways-to-define-a-javascript-class/) by Stoyan Stefanov
 * [JQuery](https://jqueryui.com) is used for the theme and standard operations in the Document Object Model (DOM) of HTML-pages. The [JQuery-Themeroller](https://jqueryui.com/themeroller/) was used to create a JQuery theme for JSCC.
+* [JSZip](http://stuartk.com/jszip) - LibreOffice files, Geogebra files (Open Source applications) have file extensions that are actually ZIP files. To handle, change and generate those documents in a browser is possible the library JSZIP. Even a small file system for WebApps that can be stored with a folder structure in a ZIP file can be generated in a browser. So [JSZip](http://stuartk.com/jszip) is a multi-functional JavaScript class for generating and reading ZIP files. Thank you for sharing this great library with the Open Source community.
 
 ## Libraries required for  `AudioSlides4Web`
 The following libraries are necessary for `audioslides4web.js`:
 
 
 ## Libraries for Building and Developement
-The following libraries are necessary for building the `audioslides4web`.
+The following libraries are necessary for building the `audioslides4web`. 
 These libraries are not included in `audioslides4web.js`, but e.g. are required in `build.js`.
 * Lib: `browserify` Version: `^14.5.0`
 * Lib: `concat-files` Version: `^0.1.1`
@@ -138,10 +149,10 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.1.2`   (last build 2019/01/08 13:08:04)
-* Homepage: `https://github.com/niebert/audioslides4web#readme`
+* Version:  `1.2.0`   (last build 2020/03/11 5:33:15)
+* Homepage: `https://gitlab.com/niehausbert/audioslides4web#readme`
 * License:  MIT
-* Date:     2019/01/08 13:08:04
+* Date:     2020/03/11 5:33:15
 * Inheritance: `AudioSlides4Web` inherits from `Handlebars`
 * Require Module with:
 ```javascript
