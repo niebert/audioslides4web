@@ -102,7 +102,9 @@
           if (vNode) {
             //console.log("CALL: file2image.onload('" + data.name + "'): "+JSON.stringify(data,null,4));
             var arr_img = vDataJSON.files.image;
-            vNode.innerHTML = vNode.innerHTML + "<li>Slide " + extract_number(data.name,arr_img.length)+ ": <tt>" + data.name + "</tt><br>" + data.tag + "</li>";
+            var slide_index = extract_number(data.name,arr_img.length);
+            vNode.innerHTML = vNode.innerHTML + "<li>Slide " + slide_index + ": <tt>" + data.name + "</tt><br>" + data.tag + "</li>";
+            data.name = "img" + slide_index + "." +getExtension(data.name);
             arr_img.push(data);
             //zip.file(data.name, data.file, {base64: true})
             setSlideCount();
@@ -130,7 +132,9 @@
           if (vNode) {
             //console.log("CALL: file2audio.onload('" + data.name + "'): "+JSON.stringify(data,null,4));
             var arr_audio = vDataJSON.files.audio;
-            vNode.innerHTML = vNode.innerHTML + "<li>Audio " + extract_number(data.name,arr_audio.length)+ ": <tt>" + data.name + "</tt> </li>";
+            var audio_index = extract_number(data.name,arr_audio.length);
+            vNode.innerHTML = vNode.innerHTML + "<li>Audio " + audio_index + ": <tt>" + data.name + "</tt> </li>";
+            data.name = "audio" + audio_index + "." +getExtension(data.name);
             arr_audio.push(data);
             setSlideCount();
             //zip.file(data.name, data.file, {base64: true})
