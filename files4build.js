@@ -51,13 +51,13 @@ const getCss4Build = function (pPath) {
 
 const getReadme4Build = function (pPath) {
   var vArray = [
-    //'./src/readme_header.md',
-    pPath+'header.md',
-    pPath+'demolink.md',
+    './src/readme_header.md',
+    //pPath+'demolink.md',
     pPath+'headerintro.md',
     pPath+'doctoc.md',
     //'./src/readme_install.md',
     pPath+'usage.md',
+    pPath+'future.md',
     /*
     pPath+'handlebars4code.md',
     pPath+'headerlibs.md',
