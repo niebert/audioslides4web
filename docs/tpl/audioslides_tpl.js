@@ -244,6 +244,16 @@ vDataJSON["tpl"]["audioslides"] = `
     overflow: hidden;
     display: none;
   }
+  .iconnext {
+    position:absolute;
+    margin-top:2%;
+    left:10%;
+  }
+  .iconprevious {
+    position:absolute;
+    margin-top:2%;
+    left:5%;
+  }
   .view body {
     position: static;
     margin: 0; padding: 0;
@@ -712,6 +722,8 @@ vDataJSON["tpl"]["audioslides"] = `
 
 </script>
 <!-- vim: set fdm=marker: -->
+<button class="iconnext" onclick="Dz.forward()">&nbsp; &gt; &nbsp;</button>
+<button class="iconprevious" onclick="Dz.back()">&nbsp; &lt; &nbsp;</button>
 </body>
 </html>
 
