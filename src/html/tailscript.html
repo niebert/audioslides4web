@@ -1,3 +1,5 @@
+<!-- BEGIN: src/html/tailscript.html -->
+
 <script language="javascript">
     //---------------------------------------
     //---COMPILE TEMPLATES Handlebars4Code---
@@ -34,3 +36,17 @@
     el("tDate").value = getDateTime();
 
 </script>
+
+<script>
+// init for pdf2png.js
+var __PDF_DOC,
+	__CURRENT_PAGE,
+	__TOTAL_PAGES,
+	__PAGE_RENDERING_IN_PROGRESS = 0,
+  __CANVAS = $('#pdf-canvas').get(0),
+  __CANVAS_PREVIEW = $('#pdf-slide-preview').get(0),
+  __CANVAS_CTX = __CANVAS.getContext('2d');
+  __CANVAS_CTX_PREVIEW= __CANVAS_PREVIEW.getContext('2d');
+</script>
+<script src="js/pdf2png.js"></script>
+<!-- END:   src/html/tailscript.html -->

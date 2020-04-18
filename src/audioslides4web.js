@@ -186,7 +186,7 @@ function callSourceZIP() {
     var vRootDir = get_root_dir();
     var vFileName = el("tFileName").value;
     save_html2zip(vRootDir+"/"+vFileName,index_out);
-    save_audio2tip(vRootDir+"/audio/");
+    save_audio2zip(vRootDir+"/audio/");
     save_images2zip(vRootDir+"/images/");
     download_zip(vRootDir+".zip",zip);
   } else {
@@ -200,7 +200,7 @@ function save_html2zip(pFileName,pOut) {
   zip.file(pFileName, pOut);
 }
 
-function save_audio2tip(pPath) {
+function save_audio2zip(pPath) {
   var arr_audio = vDataJSON.files.audio;
   var vBaseName = el("tAudioBaseName").value;
   for (i = 0; i < arr_audio.length; i++) {

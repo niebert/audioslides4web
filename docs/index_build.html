@@ -3,6 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
   <meta http-equiv="content-language" content="de">
   <meta http-equiv="desktop-type" content="tasks">
+  <link href="css/pdf2png.css" rel="stylesheet">
   <!-- END:   src/html/header.html -->
   <script language="javascript">
    // vDataJSON is the main JSON storage for the privacy friendly WebApp
@@ -58,6 +59,9 @@
 -->
   <script src="js/string.js"></script>
   <script src="js/jszip.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/pdf.worker.js"></script>
   <script src="js/loadfile4dom.js"></script>
   <script src="js/audioslides4web.js"></script>
   <script language="javascript">
@@ -143,24 +147,30 @@
       lf4d.create_load_dialog(file2audio);
       //-----------------------------------------------
     </script>
+
 </head>
 <body onload="lf4d.create()" style="margin:10px;background:#C0C0C0;font-family:Arial,Helvetica,sans-serif">
-
-    <hr>
+<!-- BODY HEADER - File: src/html/bodyheader.html -->
+      <hr>
       <center>
-        <h2>Audio Slides for Web</h2>
-        <h3><i>based on Library: <a href="https://www.npmjs.com/package/jszip" target="_blank">jszip NPM</a></i></h3>
+        <h2>Audio Slides for Web v2.0.0</h2>
+        <h3><i>based on Framework   <a href="https://github.com/paulrouget/dzslides" target="_blank">DZSlides</a>  by Paul Rouget</i></h3>
       </center>
     <hr>
     <center>
-      <p>
-        <a href="https://www.github.com/niebert/audioSlides4web" target="_blank">AudioSlides4Web</a> was created as a online alternative for <a href="https://en.wikiversity.org/wiki/PanDocElectron" target="_blank">PanDocElectron</a>.
-        See <a href="https://en.wikiversity.org/wiki/PanDocElectron/AudioSlides4Web" target="_blank">AudioSlides4Web in Wikiversity</a> for further details. It is necessary to copy you audio files in the subfolder <tt>/audio/</tt> and the slides e.g. as PNG-images into the folder <tt>/images/</tt>.
+      <button id="infobutton" class="button-default" onclick="$('#infotext').toggle();return false"><img src="img/icons-svg/info-black.svg"> Info</button> - <a href="https://niehausbert.gitlab.io/audioslides4web/tutorial"> <img src="img/icons-svg/info-black.svg"> Tutorial</a>
+      <p id="infotext" style="display:none">
+        <a href="https://niehausbert.gitlab.io/audioslides4web" target="_blank">AudioSlides4Web</a> was created as a online alternative for <a href="https://en.wikiversity.org/wiki/PanDocElectron" target="_blank">PanDocElectron</a>.
+        See <a href="https://en.wikiversity.org/wiki/PanDocElectron/AudioSlides4Web" target="_blank">AudioSlides4Web in Wikiversity</a> for further details or the <a href="tutorial/index.html" target="_blank">AudioSlides4Web-Tutorial</a>.
+        This tool will copy you audio files in the subfolder <tt>/audio/</tt> and the slides e.g. as PNG-images or GIF-animations into the folder <tt>/images/</tt>.
+        You can also load a PDF-File as source for the slides with "Add Slides"-Button.
         Adapt the basename of your audio files and images to the base name in the interface below.
       </p>
     </center>
-<center>
-  <form action="index.html" target="_blank">
+<!-- END: src/html/bodyheader.html -->
+<!-- BEGIN: src/html/body.html -->
+  <center>
+  <form action="index.html" target="_blank" id="fInputTable">
     <table border="1">
       <tr>
         <td>
@@ -247,15 +257,45 @@
           <!--
           <input type="button" id="bSource" value="Download Slides" onclick="callSource();return false">
           -->
-          <button onclick="lf4d.open_dialog('addfile2image');return false">Add Slides</button>
-          <button onclick="lf4d.open_dialog('addfile2audio');return false">Add Audio </button>
-          <button onclick="reset_ZIP();return false">Reset</button> -
-          <input type="button" id="bSourceZIP" value="Download Audiopresentation ZIP" onclick="callSourceZIP();return false" -->
-          <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
+          <button class="default-button" onclick="show_add_slides();return false"> <img src="img/icons-svg/fa-folder-open-white.svg"> Add Slides</button>
+          <button class="default-button" onclick="lf4d.open_dialog('addfile2audio');return false"> <img src="img/icons-svg/audio-white.svg"> Add Audio </button>
+          <button class="cancel-button" onclick="reset_ZIP();return false"> <img src="img/icons-svg/recycle-white.svg"> Reset</button> -
+          <button class="default-button" id="download-zip" onclick="callSourceZIP();return false"> <img src="img/icons-svg/fa-file-save-white.svg"> Download AudioSlides ZIP</button>
+          <a href="https://niehausbert.gitlab.io/audioslides4web/tutorial"> <img src="img/icons-svg/info-black.svg"> Info</a>
+          <!-- <input type="button" id="bSourceZIP" value="Download Audiopresentation" onclick="callSourceZIP();return false" > -->
+           <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
         </td>
       </tr>
     </table>
     </form>
+<div id="divaddslides" style="display:none">
+  <button id="upload-images" class="upload-slides" onclick="lf4d.open_dialog('addfile2image');$('');return false"> <img src="img/icons-svg/plus-white.svg"> <img src="img/icons-svg/fa-picture-white.svg"> Add Images</button>
+  <button id="upload-button" class="upload-slides"><img src="img/icons-svg/fa-folder-open-white.svg"> Select PDF</button>
+  <button id="pdf-selector-show" class="upload-slides" style="display:none"><img src="img/icons-svg/eye-white.svg"> Show PDF Slides</button>
+  <button id="close-add-slides" class="cancel-button"><img src="img/icons-svg/fa-cancel-white.svg"> Close</button>
+</div>
+<div id="divpdf" style="display:none">
+  <input type="file" id="file-to-upload" accept="application/pdf" />
+  <div id="pdf-main-container">
+  	<div id="pdf-loader">Loading document ...</div>
+    <div id="pdf-contents">
+      <div id="pdf-meta">
+        <div id="pdf-buttons">
+          <button id="pdf-prev" class="upload-slides"> <img src="img/icons-svg/carat-l-white.svg"> </button>
+          <button id="pdf-next" class="upload-slides"> <img src="img/icons-svg/carat-r-white.svg"> </button> &nbsp;
+          <button id="pdf-add" class="upload-slides"> <img src="img/icons-svg/plus-white.svg"> <img src="img/icons-svg/fa-picture-white.svg"> Add PNG</button>
+          <button id="pdf-download" class="upload-slides" onclick="document.getElementById('download-image').click()">  <img src="img/icons-svg/fa-file-save-white.svg"> Download PNG</button>
+          <button id="pdf-close" class="cancel-button"><img src="img/icons-svg/fa-cancel-white.svg"> Close</button>
+        </div>
+        <div id="page-count-container">Page <div id="pdf-current-page"></div> of <div id="pdf-total-pages"></div></div>
+      </div>
+      <canvas id="pdf-slide-preview" width="300"></canvas>
+      <canvas id="pdf-canvas" width="1024" style="display:none"></canvas>
+      <div id="page-loader">Loading page ...</div>
+      <a id="download-image" class="BUTTON_BLUE" href="#" style="display:none">Download PNG</a>
+    </div>
+  </div> <!-- pdf-main-container -->
+</div> <!-- divpdf -->
 
 <br>
 
@@ -281,23 +321,45 @@
 
     </table>
 </center>
+<!-- END: src/html/body.html -->
 
-<<!-- BEGIN: src/html/bodytail.html -->
+<!-- BEGIN: src/html/bodytail.html -->
+<hr>
+<div style="margin:80px">
+  <b> Main used Libaries: </b>
+  <ul>
+    <li>
+      <a href="https://github.com/paulrouget/dzslides" target="_blank">DZSlides</a>  by Paul Rouget
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/package/jszip" target="_blank">jszip NPM</a>
+    </li>
+    <li>
+      <a href="https://gitlab.com/niehausbert/loadfile4dom" target="_blank">LoadFile4DOM GitLab</a>
+    </li>
+    <li>
+      <a href="https://github.com/mozilla/pdf.js" target="_blank">pdf.js</a> PDF Loader for HTML5 by Mozilla
+    </li>
+  </ul>
+</div>
+
 <center style="display:none">
   <textarea id="outtext" rows="10" cols="120">
   </textarea>
 </center>
+<hr>
 <!-- END:   src/html/bodytail.html -->
 
-	   <!-- BEGIN: src/html_tail.html -->
+	   <!-- BEGIN: src/html/footer.html -->
 	   <center style="font-size: 10px;">
-			  <a href="https://github.com/niebert/AudioSlides4Web" target="_blank"> GitHub Sources AudioSlides4Web</a> - <a href="https://github.com/niebert/AudioSlides4Web/archive/master.zip"  target="_blank">Download AudioSlides4Web ZIP</a>
+			  <a href="https://gitlab.com/niehausbert/audioslides4web" target="_blank"> GitLab Sources AudioSlides4Web</a> - <a href="https://github.com/niehausbert/audioslides4web/-/archive/master/audioslides4web-master.zip"  target="_blank">Download AudioSlides4Web ZIP</a>
 			  <br>
-			  Version: 1.1.2 Date: 2020/03/11 6:10:06 Author: Engelbert Niehaus
+			  Version: 2.0.0 Date: 2020/03/10 Author: Engelbert Niehaus
 	   </center>
-     <!-- END:  src/html_tail.html -->
+     <!-- END:  src/html/footer.html -->
+<!-- BEGIN: src/html/tailscript.html -->
 
-	<script language="javascript">
+<script language="javascript">
     //---------------------------------------
     //---COMPILE TEMPLATES Handlebars4Code---
     //---------------------------------------
@@ -333,6 +395,20 @@
     el("tDate").value = getDateTime();
 
 </script>
+
+<script>
+// init for pdf2png.js
+var __PDF_DOC,
+	__CURRENT_PAGE,
+	__TOTAL_PAGES,
+	__PAGE_RENDERING_IN_PROGRESS = 0,
+  __CANVAS = $('#pdf-canvas').get(0),
+  __CANVAS_PREVIEW = $('#pdf-slide-preview').get(0),
+  __CANVAS_CTX = __CANVAS.getContext('2d');
+  __CANVAS_CTX_PREVIEW= __CANVAS_PREVIEW.getContext('2d');
+</script>
+<script src="js/pdf2png.js"></script>
+<!-- END:   src/html/tailscript.html -->
 <!-- BEGIN: src/html/tail.html -->
   </body>
 </html>

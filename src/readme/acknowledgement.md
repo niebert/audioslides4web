@@ -1,7 +1,8 @@
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
-* [HandleBars](http://handlebarsjs.com/) the code generation in Javascript was implemented
+* [DZSlides](https://github.com/paulrouget/dzslides)  by Paul Rouget is the used as underlying framework for the webbased presentation. Without Pauls contribution this tool `___PKG_EXPORTVAR___` would not exist.
+* [HandleBars](http://handlebarsjs.com/) is used for the HTML generation for the slides in `index.html` of generated ZIP-file of `___PKG_EXPORTVAR___`.
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the [JavascriptClassCreator Project](https://niebert.github.io/JavascriptClassCreator) `JSCC`.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
 * [Font Awesome Icons - 4.7.0](https://fontawesome.com/v4.7.0/icons/) thanks to [fontawesome.com](https://fontawesome.com) for providing the [free 4.7.0 version](https://fontawesome.com/v4.7.0/icons/) for local application for this WebApp. The [fonts in version 4.7.0](https://fontawesome.com/v4.7.0/icons/) are created by ***[Font Awesome](https://fontawesome.com)*** and

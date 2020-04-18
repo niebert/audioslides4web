@@ -1,5 +1,6 @@
-<center>
-  <form action="index.html" target="_blank">
+<!-- BEGIN: src/html/body.html -->
+  <center>
+  <form action="index.html" target="_blank" id="fInputTable">
     <table border="1">
       <tr>
         <td>
@@ -86,15 +87,45 @@
           <!--
           <input type="button" id="bSource" value="Download Slides" onclick="callSource();return false">
           -->
-          <button onclick="lf4d.open_dialog('addfile2image');return false">Add Slides</button>
-          <button onclick="lf4d.open_dialog('addfile2audio');return false">Add Audio </button>
-          <button onclick="reset_ZIP();return false">Reset</button> -
-          <input type="button" id="bSourceZIP" value="Download Audiopresentation ZIP" onclick="callSourceZIP();return false" -->
-          <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
+          <button class="default-button" onclick="show_add_slides();return false"> <img src="img/icons-svg/fa-folder-open-white.svg"> Add Slides</button>
+          <button class="default-button" onclick="lf4d.open_dialog('addfile2audio');return false"> <img src="img/icons-svg/audio-white.svg"> Add Audio </button>
+          <button class="cancel-button" onclick="reset_ZIP();return false"> <img src="img/icons-svg/recycle-white.svg"> Reset</button> -
+          <button class="default-button" id="download-zip" onclick="callSourceZIP();return false"> <img src="img/icons-svg/fa-file-save-white.svg"> Download AudioSlides ZIP</button>
+          <a href="https://niehausbert.gitlab.io/audioslides4web/tutorial"> <img src="img/icons-svg/info-black.svg"> Info</a>
+          <!-- <input type="button" id="bSourceZIP" value="Download Audiopresentation" onclick="callSourceZIP();return false" > -->
+           <!-- input type="submit" id="bSubmit" value="Download Presentation" -->
         </td>
       </tr>
     </table>
     </form>
+<div id="divaddslides" style="display:none">
+  <button id="upload-images" class="upload-slides" onclick="lf4d.open_dialog('addfile2image');$('');return false"> <img src="img/icons-svg/plus-white.svg"> <img src="img/icons-svg/fa-picture-white.svg"> Add Images</button>
+  <button id="upload-button" class="upload-slides"><img src="img/icons-svg/fa-folder-open-white.svg"> Select PDF</button>
+  <button id="pdf-selector-show" class="upload-slides" style="display:none"><img src="img/icons-svg/eye-white.svg"> Show PDF Slides</button>
+  <button id="close-add-slides" class="cancel-button"><img src="img/icons-svg/fa-cancel-white.svg"> Close</button>
+</div>
+<div id="divpdf" style="display:none">
+  <input type="file" id="file-to-upload" accept="application/pdf" />
+  <div id="pdf-main-container">
+  	<div id="pdf-loader">Loading document ...</div>
+    <div id="pdf-contents">
+      <div id="pdf-meta">
+        <div id="pdf-buttons">
+          <button id="pdf-prev" class="upload-slides"> <img src="img/icons-svg/carat-l-white.svg"> </button>
+          <button id="pdf-next" class="upload-slides"> <img src="img/icons-svg/carat-r-white.svg"> </button> &nbsp;
+          <button id="pdf-add" class="upload-slides"> <img src="img/icons-svg/plus-white.svg"> <img src="img/icons-svg/fa-picture-white.svg"> Add PNG</button>
+          <button id="pdf-download" class="upload-slides" onclick="document.getElementById('download-image').click()">  <img src="img/icons-svg/fa-file-save-white.svg"> Download PNG</button>
+          <button id="pdf-close" class="cancel-button"><img src="img/icons-svg/fa-cancel-white.svg"> Close</button>
+        </div>
+        <div id="page-count-container">Page <div id="pdf-current-page"></div> of <div id="pdf-total-pages"></div></div>
+      </div>
+      <canvas id="pdf-slide-preview" width="300"></canvas>
+      <canvas id="pdf-canvas" width="1024" style="display:none"></canvas>
+      <div id="page-loader">Loading page ...</div>
+      <a id="download-image" class="BUTTON_BLUE" href="#" style="display:none">Download PNG</a>
+    </div>
+  </div> <!-- pdf-main-container -->
+</div> <!-- divpdf -->
 
 <br>
 
@@ -120,3 +151,4 @@
 
     </table>
 </center>
+<!-- END: src/html/body.html -->

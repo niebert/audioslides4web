@@ -1,3 +1,4 @@
+# AudioSlides4Web
 `AudioSlides4Web` is a library and NPM module that was created as a online alternative for one export format of PanDocElectron. The WebApp runs completely in a browser  without contacting a web server for processing for generating a webbased presentation from slide/images and audio comments as MP3.
 * **[Demo AudioSlides4Web](https://niebert.github.io/audioslides4web)**
 
@@ -12,8 +13,12 @@ The following table of contents is generated with `node doctoc README.md`.
 
 
 - [Usage](#usage)
-- [Quick Start for Offline Use](#quick-start-for-offline-use)
-- [Schema for Slide Generation](#schema-for-slide-generation)
+- [Quick Start](#quick-start)
+- [Offline Usage of AppLSAC](#offline-usage-of-applsac)
+- [Future modifications](#future-modifications)
+  - [Small Videos instead of Animations](#small-videos-instead-of-animations)
+  - [Markdown Slides](#markdown-slides)
+  - [JSON Schema for Slide Generation](#json-schema-for-slide-generation)
 - [Build Process of `npm run build`](#build-process-of-npm-run-build)
 - [Build and Compress with Browserify, Watchify, UglifyJS](#build-and-compress-with-browserify-watchify-uglifyjs)
   - [Browserify and Watchify](#browserify-and-watchify)
@@ -39,14 +44,38 @@ First of all try to run the basic online tool to create a ZIP file with folders 
 * You can record the audio comments with Open Source software [Audacity](https://www.audacityteam.org/), which you should store in MP3 format.
 * Press Download ZIP and you will get the ZIP folder structure with the presentation as `audio_slides.zip`.
 
-## Quick Start for Offline Use
-Download the `https://gitlab.com/niebert/audioslides4web/-/archive/master/audioslides4web-master.zip` and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. `src` contains the sources for the build process).
+## Quick Start
+* Generate PNG files of you presentation or create a PDF document of your presentation (e.g. HTML export with [LibreOffice](https://www.libreoffice.org) and you will get the slides as a sequence of image properly enumerated with `img0.png`, `img1.png`, `img2.png`, ....
+* Record Audio Comments with [Audacity](https://www.audacityteam.org/) for recording of your comments for the slides and save your audio comments as files `audio0.mp3`, `audio1.mp3`, `audio2.mp3`, ....
+* The audio files with `audio2.png` will be mapped to the slide `img2.png`, so save the recorded audio files  according to the slide index 2 with `audio2.mp3`.
+* Start [`AudioSlides4Web`](https://niebert.github.io/audioslides4web) directly from the server or download the [ZIP-file](https://github.com/niebert/audioslides4web/archive/master.zip) and unzip the file. The unzipped folder contains a `docs/`-folder. This folder contains the relevant WebApp ([AppLSAC-2](https://en.wikiversity.org/wiki/AppLSAC)). The other directories are required for building the WebApp (e.g. the folder `src/` contains the sources for the build process `npm run build` for developers).
 For offline use just copy the `docs/`-folder, rename the folder to `audioslides4web/`. For starting the WebApp load the file `audioslides4web/index.html` in a current version of Firefox, Chrome or Safari.
 
-## Schema for Slide Generation
-adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for your requirements. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
-
 <!-- END:   src/readme/usage.md -->
+## Offline Usage of AppLSAC
+The software `AudioSlides4Web` is an HTML5 application. It can be placed on a webserver, but it can be used as an [AppLSAC](https://en.wikiversity.org/wiki/AppLSAC). An AppLSAC can be used offline as well without internet connection, because the software is implemented with Javascript, HTML and CSS and uses the browser just as runtime environment for the code without the need to contact a remote server for processing. So if you use `AudioSlides4Web` on https://niebert.github.io/audioslides4web then the slides as PNG images, the audio MP3 files are processed and ZIP in your own browser and saving of the generated ZIP-file is performed by the download feature of browsers.
+
+If you want to use the `AudioSlides4Web`-generator locally
+* download the [`AudioSlides4Web`ZIP-file](https://github.com/niebert/audioslides4web/archive/master.zip)
+* extract the ZIP file and
+* load the file `docs/index.html` the browser.
+
+For running `AudioSlides4Web` you just need the folder `docs/` folder in the extracted ZIP file. You can also delete the folder `tutorial/` and the folder `southampton2019/` as a demo output. 
+## Future modifications
+The following options are not implemented yet.
+
+### Small Videos instead of Animations
+GIF-images can be uploaded into AudioSlides4Web and this allows to use animated slides in the current version.
+For this extension of AudioSlides4Web we need to add a button `Add Video` and allow uploading Videos in the `webm` format and embed that as slide with video into AudioSlides4Web.
+
+### Markdown Slides
+Instead of uploading an image as slide another option could be the selection of WikiMedia markdown slides as `slide3.wiki` or `slide3.md` as text-based slide, that will be converted by a `markdown2html` converter or by `wtf_wikipedia` into a DZSlides format.
+
+### JSON Schema for Slide Generation
+The possible idea of extending AudioSlides4Web will be to use a [JSONEditor](https://github.com/jdorn/json-editor) originally generated and maintained by Jeremy Dorn for storing the generated web-based presentation in a single JSON. With the concept of an [AppLSAC](https://en.wikiversity.org/wiki/AppLSAC) we can load and save this presentation in single JSON and modify single slides.
+For this extension we create JSON-schema and store that in`docs/schema` and a sample JSON data in the folder `docs/db/`. to a JSON schema for storing a generated AudioSlides4Web presentation for future modification. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
+
+So it necessary to adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for the requirements of `AudioSlides4Web`. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema) to generate a rapid prototype of a JSON editor.
 <!-- BEGIN: src/readme/build_process.md -->
 
 ## Build Process of `npm run build`
@@ -114,7 +143,8 @@ The compression of `dist/audioslides4web.js` into `dist/audioslides4web.min.js` 
 
 ## Acknowledgement
 Special thanks to the following individual developers and teams of OpenSource JavaScript projects:
-* [HandleBars](http://handlebarsjs.com/) the code generation in Javascript was implemented
+* [DZSlides](https://github.com/paulrouget/dzslides)  by Paul Rouget is the used as underlying framework for the webbased presentation. Without Pauls contribution this tool `AudioSlides4Web` would not exist.
+* [HandleBars](http://handlebarsjs.com/) is used for the HTML generation for the slides in `index.html` of generated ZIP-file of `AudioSlides4Web`.
 * [JSON-Editor](https://github.com/jdorn/json-editor) by Jeremy Dorn. The JSON Editor takes a JSON Schema and uses it to generate an HTML form. The JSON-Editor is partially used to edit JSON file of the [JavascriptClassCreator Project](https://niebert.github.io/JavascriptClassCreator) `JSCC`.
 The JSON-Editor of Jeremy Dorn has full support for JSON Schema version 3 and 4 and can integrate with several popular CSS frameworks (bootstrap, foundation, and jQueryUI). This would lead to major code reduction of `JSCC` . Refactoring of `JSCC` would make more use of the JSON-Editor features. Check out an interactive demo (demo.html): http://jeremydorn.com/json-editor/
 * [Font Awesome Icons - 4.7.0](https://fontawesome.com/v4.7.0/icons/) thanks to [fontawesome.com](https://fontawesome.com) for providing the [free 4.7.0 version](https://fontawesome.com/v4.7.0/icons/) for local application for this WebApp. The [fonts in version 4.7.0](https://fontawesome.com/v4.7.0/icons/) are created by ***[Font Awesome](https://fontawesome.com)*** and
@@ -149,10 +179,10 @@ These libraries are not included in `audioslides4web.js`, but e.g. are required 
 ## NPM Library Information
 * Exported Module Variable: `AudioSlides4Web`
 * Package:  `audioslides4web`
-* Version:  `1.2.2`   (last build 2020/03/11 9:45:35)
+* Version:  `2.0.0`   (last build 2020/04/18 19:06:36)
 * Homepage: `https://github.com/niebert/audioslides4web#readme`
 * License:  MIT
-* Date:     2020/03/11 9:45:35
+* Date:     2020/04/18 19:06:36
 * Require Module with:
 ```javascript
     const vAudioSlides4Web = require('audioslides4web');

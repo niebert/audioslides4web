@@ -11,3 +11,5 @@ Instead of uploading an image as slide another option could be the selection of 
 ### JSON Schema for Slide Generation
 The possible idea of extending AudioSlides4Web will be to use a [JSONEditor](https://github.com/jdorn/json-editor) originally generated and maintained by Jeremy Dorn for storing the generated web-based presentation in a single JSON. With the concept of an [AppLSAC](https://en.wikiversity.org/wiki/AppLSAC) we can load and save this presentation in single JSON and modify single slides.
 For this extension we create JSON-schema and store that in`docs/schema` and a sample JSON data in the folder `docs/db/`. to a JSON schema for storing a generated AudioSlides4Web presentation for future modification. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema).
+
+So it necessary to adapt the JSON-schema `docs/schema` and the JSON data in the folder `docs/db/` to the schema for the requirements of `___PKG_EXPORTVAR___`. If you want to create your own JSON schema use the [JSON2Schema tool](https://niebert/github.io/JSON2Schema) to generate a rapid prototype of a JSON editor.

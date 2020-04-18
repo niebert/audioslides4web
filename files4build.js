@@ -33,8 +33,8 @@ const getHtml4Build = function (pPath) {
     //'./src/html_description.html',
     pPath+'body.html',
     pPath+'bodytail.html',
-    //'./src/html_tail.html',
-    pPath+'footer.html',
+    './src/html_tail.html',
+    //pPath+'footer.html',
     pPath+'tailscript.html',
     pPath+'tail.html'
   ];
@@ -57,6 +57,7 @@ const getReadme4Build = function (pPath) {
     pPath+'doctoc.md',
     //'./src/readme_install.md',
     pPath+'usage.md',
+    pPath+'offline.md',
     pPath+'future.md',
     /*
     pPath+'handlebars4code.md',
