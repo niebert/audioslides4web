@@ -1,0 +1,22 @@
+# This file is a template, and might need editing before it works on your project.
+# Full project: https://gitlab.com/pages/plain-html
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - mkdir .public/src
+  - mkdir .public/build
+  - mkdir .public/build/jscc
+  - cp -r docs/* .public
+  - cp -r src/* .public/src
+  - cp build.js .public/build/build.js
+  - cp -r jscc/* .public/build/jscc
+  - cp update_src_gitlab.sh .public/build/update_src_gitlab.sh
+  - cp files4build.js .public/build/files4build.js
+  - cp package.json .public/build/package.json
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
