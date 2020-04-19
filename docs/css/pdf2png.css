@@ -38,7 +38,8 @@
    text-decoration: none;
 }
 .default-button {
-	width: 80px auto;
+	overflow: auto;
+  width: 80px auto;
   height: 30px;
   margin: 5px auto;
 	background-color: blue;
@@ -46,14 +47,16 @@
 }
 
 .upload-slides {
-	width: 100px auto;
+	overflow: auto;
+  width: 100px auto;
   height: 30px;
   margin: 5px auto;
 	background-color: blue;
 	color: white
 }
 .cancel-button {
-	width: 80px;
+	overflow: auto;
+  width: 80px;
   height: 30px;
   margin: 5px auto;
 	background-color: red;
