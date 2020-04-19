@@ -153,19 +153,29 @@
 <!-- BODY HEADER - File: src/html/bodyheader.html -->
       <hr>
       <center>
-        <h2>Audio Slides for Web v2.0.0</h2>
+        <h2>Audio Slides for Web v2.0.1</h2>
         <h3><i>based on Framework   <a href="https://github.com/paulrouget/dzslides" target="_blank">DZSlides</a>  by Paul Rouget</i></h3>
       </center>
     <hr>
     <center>
       <button id="infobutton" class="button-default" onclick="$('#infotext').toggle();return false"><img src="img/icons-svg/info-black.svg"> Info</button> - <a href="https://niehausbert.gitlab.io/audioslides4web/tutorial"> <img src="img/icons-svg/info-black.svg"> Tutorial</a>
-      <p id="infotext" style="display:none">
+      <div id="infotext" style="display:none;align:left;text-align: left;width:80%">
+        <hr>
         <a href="https://niebert.github.io/audioslides4web" target="_blank">AudioSlides4Web</a> was created as a online alternative for <a href="https://en.wikiversity.org/wiki/PanDocElectron" target="_blank">PanDocElectron</a>.
         See <a href="https://en.wikiversity.org/wiki/PanDocElectron/AudioSlides4Web" target="_blank">AudioSlides4Web in Wikiversity</a> for further details or the <a href="tutorial/index.html" target="_blank">AudioSlides4Web-Tutorial</a>.
         This tool will copy you audio files in the subfolder <tt>/audio/</tt> and the slides e.g. as PNG-images or GIF-animations into the folder <tt>/images/</tt>.
-        You can also load a PDF-File as source for the slides with "Add Slides"-Button.
+        Take care that the filename of slides have a number in it, which represents the slidenumber, e.g. <tt>audio5.mp3</tt> for audio comment for 5th slide <tt>img5.png</tt> or <tt>audio0.mp3</tt> for the title slide <tt>img0.png</tt>
+        <hr>
+        <b>PDF as Source for Slides:</b> You can also load a PDF-File as source for the slides with [Add Slides]-Button and select PDF pages (landscape format) as slides for your presentation. You can skip some slides or reorder the slides for your presentation.
         Adapt the basename of your audio files and images to the base name in the interface below.
-      </p>
+        <hr>
+        <b>ZIP-File Export:</b>  Press [Download AudioSlides ZIP] to download the generated ZIP file. The <a href="https://en.wikiversity.org/wiki/AppLSAC" target="_blank">AppLSAC</a> is a privacy friendly WebApp the generates the ZIP-file in your browser with the library <tt>jszip.js</tt>, so the audio files, PDF and image files are loaded into your browser instead uploading the files to a remote server.
+        <hr>
+        <b>Start Presentation:</b> You can view the webbased presentation by extrating the ZIP file and load the file <tt>index.html</tt>.
+        <hr>
+        <b>Changes Slides/Audio:</b> You can exchange the slides or audio comments just by replacing  the slide <tt>audio5.png</tt>
+        <hr>
+      </div>
     </center>
 <!-- END: src/html/bodyheader.html -->
 <!-- BEGIN: src/html/body.html -->
@@ -354,7 +364,7 @@
 	   <center style="font-size: 10px;">
 			  <a href="https://github.com/niebert/AudioSlides4Web" target="_blank"> GitHub Sources AudioSlides4Web</a> - <a href="https://github.com/niebert/AudioSlides4Web/archive/master.zip"  target="_blank">Download AudioSlides4Web ZIP</a>
 			  <br>
-			  Version: 2.0.0 Date: 2020/04/18 19:06:36 Author: Engelbert Niehaus
+			  Version: 2.0.1 Date: 2020/04/19 9:52:21 Author: Engelbert Niehaus
 	   </center>
      <!-- END:  src/html_tail.html -->
 
