@@ -3,7 +3,7 @@
   <form action="index.html" target="_blank" id="fInputTable">
     <table border="1">
       <tr>
-        <td>
+        <td valign="top">
           <b>Title</b><input type="text" id="tUndefined" value="ERROR" style="display:none">
         </td>
         <td>
@@ -11,15 +11,25 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <b>Course</b>
+        <td valign="top">
+          <select name="topic" id="tTopic">
+            <option value=" "> - </option>
+            <option value="Conference">Conference</option>
+            <option value="Course" selected>Course</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Institution">Institution</option>
+            <option value="Organisation">Organisation</option>
+            <option value="Topic">Topic</option>
+            <option value="Tutorial">Tutorial</option>
+            <option value="Workshop">Workshop</option>
+          </select>
         </td>
         <td>
           <input type="text" size="80" name="course" id="tCourse" value="Ecotoxicology">
         </td>
       </tr>
       <tr>
-        <td>
+        <td valign="top">
           <b>Author</b>
         </td>
         <td>
@@ -27,7 +37,7 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td valign="top">
           <b>Date</b>
         </td>
         <td>
@@ -35,7 +45,7 @@
         </td>
       </tr>
       <tr style="display:none">
-          <td>
+          <td valign="top">
             <b>Audio Slides</b>
           </td>
           <td>
@@ -46,7 +56,7 @@
           </td>
       </tr>
       <tr>
-        <td>
+        <td valign="top">
           <b>Slide Index</b>
         </td>
         <td>
@@ -55,7 +65,7 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td valign="top">
           <b>Slide Image Files</b>
         </td>
         <td>
@@ -63,7 +73,7 @@
         </td>
       </tr>
         <tr>
-        <td>
+        <td valign="top">
           <b>Audio Files</b>
         </td>
         <td>
@@ -72,15 +82,24 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <b>Filename</b>
+        <td valign="top">
+          <b>HTML Filename</b>
         </td>
         <td>
           <input type="text" size="30" name="filename" id="tFileName" value="index.html">
         </td>
       </tr>
       <tr>
+        <td valign="top">
+          <b>Folder/ZIP Name</b>
+        </td>
         <td>
+          <input type="text" size="30" name="zipfilename" id="tZIPFileName" value="">
+          <a href="#" onclick="alert('If tex box is empty, folder name will be created from title of the presentation.\nFolder: '+get_root_dir()+'/\nZIP: '+get_root_dir()+'.zip')"> <img src="img/icons-svg/info-black.svg"></a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">
           <b>Audio Slides:</b>
         </td>
         <td>
@@ -97,7 +116,7 @@
         </td>
       </tr>
     </table>
-    </form>
+</form>
 <div id="divaddslides" style="display:none">
   <button id="upload-images" class="upload-slides" onclick="lf4d.open_dialog('addfile2image');$('');return false"> <img src="img/icons-svg/plus-white.svg"> <img src="img/icons-svg/fa-picture-white.svg"> Add Images</button>
   <button id="upload-button" class="upload-slides"><img src="img/icons-svg/fa-folder-open-white.svg"> Select PDF</button>

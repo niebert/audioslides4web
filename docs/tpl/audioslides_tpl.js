@@ -7,7 +7,6 @@ vDataJSON["tpl"]["audioslides"] = `
   <meta name="author" content="{{author}}">
   <meta name="course" content="{{course}}">
   <style type="text/css">code{white-space: pre;}</style>
-<!-- link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' -->
 
 <style>
   html, .view body { background-color: black;  counter-reset: slideidx; }
@@ -152,11 +151,13 @@ vDataJSON["tpl"]["audioslides"] = `
 				<center>
 {{#ifcond ext "!=" "-"}}
 					{{{data.audio.controls}}}
-			  		<source src="audio/{{data.audio.basename}}{{number}}.{{ext}}" type="audio/{{audiotype}}"> <!-- AudioType: {{audiotype}} -->
+			  		<source src="audio/{{data.audio.basename}}{{number}}.{{ext}}"  loading="lazy" type="audio/{{audiotype}}"> <!-- AudioType: {{audiotype}} -->
 					</audio>
 {{/ifcond}}
 {{#ifcond ext "==" "-"}}
-					&nbsp; <br>
+					<div class="bottom-space">
+             &nbsp;
+          </div>
 {{/ifcond}}
 				</center>
 			</td>
@@ -164,7 +165,7 @@ vDataJSON["tpl"]["audioslides"] = `
 		<tr>
 			<td>
 				<center>
-					<img src="images/{{data.image.basename}}{{number}}.{{data.image.ext}}" width="90%" title="Slide {{number}} with Audioplayer " />
+					<img src="images/{{image}}"  loading="lazy"  width="90%" title="Slide {{number}} with Audioplayer " />
 				</center>
 			</td>
 		</tr>
@@ -176,7 +177,7 @@ vDataJSON["tpl"]["audioslides"] = `
    <br/>
     <table width="80%" style="color:white;">
       <tr>
-        <td>
+        <td valign="top">
           <b>Title</b>
         </td>
         <td>
@@ -184,15 +185,15 @@ vDataJSON["tpl"]["audioslides"] = `
         </td>
       </tr>
       <tr>
-        <td>
-          <b>Course</b>
+        <td valign="top">
+          <b>{{topic}}</b>
         </td>
         <td>
           {{course}}
         </td>
       </tr>
       <tr>
-        <td>
+        <td valign="top">
           <b>Author</b>
         </td>
         <td>
@@ -200,10 +201,10 @@ vDataJSON["tpl"]["audioslides"] = `
         </td>
        </tr>
        <tr>
-         <td>
+         <td valign="top">
            <b>Date</b>
          </td>
-         <td>
+         <td valign="top">
            {{date}}
          </td>
         </tr>
@@ -253,6 +254,9 @@ vDataJSON["tpl"]["audioslides"] = `
     position:absolute;
     margin-top:2%;
     left:5%;
+  }
+  .bottom-space {
+     margin-bottom: 20px;
   }
   .view body {
     position: static;
@@ -496,7 +500,7 @@ vDataJSON["tpl"]["audioslides"] = `
           audio.play();
         } else {
           audio.pause();
-          audio.stop();
+          // audio.stop();
         }
       }
     }

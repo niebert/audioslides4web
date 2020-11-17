@@ -1,5 +1,6 @@
 var vDOM2ID = {
   "tTitle":"title",
+  "tTopic":"topic",
   "tCourse":"course",
   "tAuthor":"author",
   "tFirst":"first",
